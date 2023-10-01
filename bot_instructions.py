@@ -156,8 +156,8 @@ sqlbot_instructions = """
     
     Use the following format:
 
-    Request: {chatbot_output}
-    SQLQuery: SQL Query to run
-    SQLResult: Result of the SQLQuery
-    Answer: Final answer here
+    Request: {chatbot_output} \n
+    SQLQuery: SQL Query to run \n
+    SQLResult: Result of the SQLQuery \n
+    Answer: Final answer here \n
     """
