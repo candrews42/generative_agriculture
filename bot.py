@@ -118,7 +118,7 @@ class generative_agriculture:
                 sql_response = chatbot_agent.run(chatbot_response, callbacks=[st_cb])
                 # sql_response = sql_agent.run(chatbot_response, callbacks=[st_cb])
                 st.session_state.messages.append({"role": "assistant", "content": sql_response})
-                st.write(sql_response)
+                # st.write(sql_response)
                 # else:
                 #    chatbot_response = chatbot_agent.run(user_query, callbacks=[st_cb])
                 #    st.session_state.messages.append({"role": "chatbot", "content": chatbot_response})
