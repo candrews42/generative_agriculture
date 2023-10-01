@@ -18,6 +18,8 @@ from langchain.memory import ConversationBufferMemory, ConversationBufferWindowM
 from langchain.prompts import PromptTemplate
 from langchain.chains import ConversationChain
 from langchain.utilities import WikipediaAPIWrapper
+from sqlalchemy import create_engine
+# import psycopg2
 
 import streamlit as st
 import os
@@ -43,7 +45,7 @@ class generative_agriculture:
         # Database Connection
         # db = SQLDatabase.from_uri(postgresql_key)
         db = SQLDatabase.from_uri(st.secrets["postgresql_key"])
-        # self.engine = create_engine(postgresql_key)
+        # _self.engine = create_engine(st.secrets["postgresql_key"])
 
         # 3. Setup llms
         # 3.1 Tools and Toolkit Setup
