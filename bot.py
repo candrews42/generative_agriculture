@@ -52,13 +52,17 @@ class generative_agriculture:
 
         db_url = 'postgresql+psycopg2://{}:{}@{}:{}/{}'.format(
             username, password, host, port, database)
-
+        
+        print("database url:")
+        print(db_url)
+        print("setting up SQL database connection")
         #engine = sqlalchemy.create_engine(db_url)
         #conn = engine.connect()
 
         db = SQLDatabase.from_uri(db_url)
         # _self.engine = create_engine(st.secrets["postgresql_key"])
 
+        print("database connection complete")
         # 3. Setup llms
         # 3.1 Tools and Toolkit Setup
         tools = load_tools(["wikipedia", "llm-math"], llm=OpenAI(temperature=0.1))
