@@ -5,7 +5,7 @@ import utils
 from bot_instructions import chatbot_PREFIX, chatbot_FORMAT_INSTRUCTIONS, chatbot_instructions, sqlbot_instructions
 import streamlit as st
 import pandas as pd
-from sqlalchemy import create_engine
+# from sqlalchemy import create_engine
 from streaming import StreamHandler
  
 from langchain.agents import create_sql_agent, AgentExecutor, load_tools, AgentType, initialize_agent
