@@ -1,7 +1,7 @@
 # 0. Import Statements
 import os
 import utils
-from api_keys import openai_key, postgresql_key 
+# from api_keys import openai_key, postgresql_key 
 from bot_instructions import chatbot_PREFIX, chatbot_FORMAT_INSTRUCTIONS, chatbot_instructions, sqlbot_instructions
 import streamlit as st
 import pandas as pd
