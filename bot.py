@@ -107,7 +107,8 @@ class generative_agriculture:
     
     @utils.enable_chat_history
     def main(self):
-        chatbot_agent, sql_agent = self.setup_chain()
+        chatbot_agent = self.setup_chain()
+        # chatbot_agent, sql_agent = self.setup_chain()
         user_query = st.chat_input(placeholder="Enter your observation or question about the farm")
         if user_query:
             utils.display_msg(user_query, 'user')
