@@ -65,7 +65,7 @@ class generative_agriculture:
         print("database connection complete")
         # 3. Setup llms
         # 3.1 Tools and Toolkit Setup
-        tools = load_tools(["wikipedia", "llm-math"], llm=OpenAI(temperature=0.1))
+        # tools = load_tools(["llm-math"], llm=OpenAI(temperature=0.1))
         # toolkit = SQLDatabaseToolkit(db=db, llm=OpenAI(temperature=0))
 
         # 3.2 Memory Setup
