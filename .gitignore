@@ -132,6 +132,7 @@ dmypy.json
 config/config.yml
 config/config.env
 api_keys.py
+api_keys.toml
 
 docker-compose.dev.yml
 

@@ -75,6 +75,7 @@ chatbot_FORMAT_INSTRUCTIONS = """
 
 # 2. PromptTemplate and Instructions
 chatbot_instructions = """
+    
     1. Await User Input
     # Wait for farm manager's input about an observation or request for information.
 
@@ -148,4 +149,15 @@ chatbot_instructions = """
     Here is the user input:
     {human_input}
     """
-sqlbot_instructions = 'turn this into a sql query: {chatbot_output}'
+sqlbot_instructions = """
+    Given an input question, 
+    1. make sure you have all relevant information from the user, ask them for what you need before running any query.
+    2. create a syntactically correct postgresql query to run, then look at the results of the query and return the answer.
+    
+    Use the following format:
+
+    Request: {chatbot_output}
+    SQLQuery: SQL Query to run
+    SQLResult: Result of the SQLQuery
+    Answer: Final answer here
+    """
