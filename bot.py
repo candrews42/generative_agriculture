@@ -44,7 +44,19 @@ class generative_agriculture:
     def setup_chain(_self):
         # Database Connection
         # db = SQLDatabase.from_uri(postgresql_key)
-        db = SQLDatabase.from_uri(st.secrets["postgresql_key"])
+        username = st.secrets["username"]  # DB username
+        password = st.secrets["password"]  # DB password
+        host = st.secrets["host"]  # Public IP address for your instance
+        port = st.secrets["port"]
+        database = st.secrets["database"]  # Name of database ('postgres' by default)
+
+        db_url = 'postgresql+psycopg2://{}:{}@{}:{}/{}'.format(
+            username, password, host, port, database)
+
+        #engine = sqlalchemy.create_engine(db_url)
+        #conn = engine.connect()
+
+        db = SQLDatabase.from_uri(db_url)
         # _self.engine = create_engine(st.secrets["postgresql_key"])
 
         # 3. Setup llms
