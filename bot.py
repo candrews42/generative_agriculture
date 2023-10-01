@@ -19,7 +19,8 @@ from langchain.prompts import PromptTemplate
 from langchain.chains import ConversationChain
 from langchain.utilities import WikipediaAPIWrapper
 
-
+import streamlit as st
+import os
 
 # 2. Setup Streamlit app
 st.set_page_config(page_title="GenAg Chatbot", page_icon="🌱", layout="wide")
@@ -40,7 +41,8 @@ class generative_agriculture:
     @st.cache_resource
     def setup_chain(_self):
         # Database Connection
-        db = SQLDatabase.from_uri(postgresql_key)
+        # db = SQLDatabase.from_uri(postgresql_key)
+        db = SQLDatabase.from_uri(st.secrets["postgresql_key"])
         # self.engine = create_engine(postgresql_key)
 
         # 3. Setup llms
@@ -88,15 +90,15 @@ class generative_agriculture:
     @utils.enable_chat_history
     def main(self):
         chatbot_agent, sql_agent = self.setup_chain()
-        user_query = st.chat_input(placeholder="Enter your observation or question.")
+        user_query = st.chat_input(placeholder="Enter your observation or question about the farm")
         if user_query:
             utils.display_msg(user_query, 'user')
-            with st.chat_message("chatbot"):
+            with st.chat_message("assistant"):
                 st_cb = StreamHandler(st.empty())
-                # if user_query == "done":
                 chatbot_response = sqlbot_instructions.format(chatbot_output=user_query)
                 sql_response = sql_agent.run(chatbot_response, callbacks=[st_cb])
-                st.session_state.messages.append({"role": "chatbot", "content": sql_response})
+                st.session_state.messages.append({"role": "assistant", "content": sql_response})
+                st.write(sql_response)
                 # else:
                 #    chatbot_response = chatbot_agent.run(user_query, callbacks=[st_cb])
                 #    st.session_state.messages.append({"role": "chatbot", "content": chatbot_response})
