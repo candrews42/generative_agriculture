@@ -44,10 +44,10 @@ def display_msg(msg, author):
 
 def configure_openai_api_key():
     # openai_api_key = openai_key
-    if mode == "local":
-        openai_api_key = openai_key
-    else:
-        openai_api_key = st.secrets["openai_key"]
+    # if mode == "local":
+    #     openai_api_key = openai_key
+    # else:
+    openai_api_key = st.secrets["openai_key"]
     if openai_api_key:
         st.session_state['OPENAI_API_KEY'] = openai_api_key
         os.environ['OPENAI_API_KEY'] = openai_api_key
