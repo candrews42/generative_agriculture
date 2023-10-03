@@ -24,6 +24,8 @@ from sqlalchemy import create_engine
 import streamlit as st
 import os
 
+
+
 # 2. Setup Streamlit app
 st.set_page_config(page_title="GenAg Chatbot", page_icon="🌱", layout="wide")
 st.header("Generative Agriculture Chatbot")
@@ -49,24 +51,35 @@ class generative_agriculture:
         # host = st.secrets["host"]  # Public IP address for your instance
         # port = st.secrets["port"]
         # database = st.secrets["database"]  # Name of database ('postgres' by default)
+        mode = "remote"
+        # from api_keys import username, password, host, port, database
 
-        # db_url = 'postgresql+psycopg2://{}:{}@{}:{}/{}'.format(
-        #     username, password, host, port, database)
-        
-        # print("database url:")
-        # print(db_url)
-        # print("setting up SQL database connection")
-        # #engine = sqlalchemy.create_engine(db_url)
-        # #conn = engine.connect()
+        if mode == "remote":
+            username = st.secrets["username"]  # DB username
+            password = st.secrets["password"]  # DB password
+            host = st.secrets["host"]  # Public IP address for your instance
+            port = st.secrets["port"]
+            database = st.secrets["database"]  # Name of database ('postgres' by default)
 
-        # db = SQLDatabase.from_uri(db_url)
+        db_url = f'postgresql+psycopg2://{username}:{password}@{host}:{port}/{database}'
+        db = SQLDatabase.from_uri(db_url)
+
+        print("setting up SQL database connection")
         # _self.engine = create_engine(st.secrets["postgresql_key"])
+        # try:
+        #     _self.engine = create_engine(db_url)
+        #     conn = _self.engine.connect()
+        # except Exception as e:
+        #     st.write(f"An error occurred: {e}")
+        # # finally:
+        # #     if conn:
+        # #         conn.close()
 
         print("database connection complete")
         # 3. Setup llms
         # 3.1 Tools and Toolkit Setup
         # tools = load_tools(["llm-math"], llm=OpenAI(temperature=0.1))
-        # toolkit = SQLDatabaseToolkit(db=db, llm=OpenAI(temperature=0))
+        toolkit = SQLDatabaseToolkit(db=db, llm=OpenAI(temperature=0))
 
         # 3.2 Memory Setup
         chatbot_memory = ConversationBufferMemory()# input_key='human_input', memory_key='chatbot_history')
@@ -90,20 +103,20 @@ class generative_agriculture:
             prompt=chatbot_prompt_template, 
             verbose=True)
         # sql agent initialization
-        # sql_agent = create_sql_agent(
-        #     llm=OpenAI(temperature=0),
-        #     toolkit=toolkit,
-        #     verbose=True,
-        #     memory=sqlagent_memory,
-        #     agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
-        #     # agent_kwargs={
-        #     #     'prefix': prompt_for_sql_agent
-        #     # }
-        # )
+        sql_agent = create_sql_agent(
+            llm=OpenAI(temperature=0),
+            toolkit=toolkit,
+            verbose=True,
+            memory=sqlagent_memory,
+            agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
+            # agent_kwargs={
+            #     'prefix': prompt_for_sql_agent
+            # }
+        )
         # memory = ConversationBufferMemory()
         # llm = OpenAI(model_name=_self.openai_model, temperature=0, streaming=True)
         # chatbot_agent = ConversationChain(llm=llm, memory=memory, verbose=True)
-        return chatbot_agent #, sql_agent
+        return sql_agent #, sql_agent
     
     @utils.enable_chat_history
     def main(self):

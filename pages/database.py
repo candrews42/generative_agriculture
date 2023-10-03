@@ -4,8 +4,8 @@ import pandas as pd
 #from urllib.error import URLError
 import sqlalchemy
 
-from api_keys import username, password, host, port, database
-mode = "local"
+#from api_keys import username, password, host, port, database
+mode = "remote"
 
 st.set_page_config(page_title="DataFrame Demo", page_icon="📊")
 
@@ -24,16 +24,20 @@ if mode == "remote":
     port = st.secrets["port"]
     database = st.secrets["database"]  # Name of database ('postgres' by default)
 
-db_url = 'postgresql+psycopg2://{}:{}@{}:{}/{}'.format(
-    username, password, host, port, database)
+db_url = f'postgresql+psycopg2://{username}:{password}@{host}:{port}/{database}'
 
-engine = sqlalchemy.create_engine(db_url)
-conn = engine.connect()
-
-st.title('Database Table Viewer')
-query = "SELECT * FROM task_list;"
-df = pd.read_sql(query, engine)
-st.table(df)
+try:
+    engine = sqlalchemy.create_engine(db_url)
+    conn = engine.connect()
+    query = "SELECT * FROM task_list;"
+    df = pd.read_sql(query, engine)
+    st.table(df)
+    st.write()
+except Exception as e:
+    st.write(f"An error occurred: {e}")
+finally:
+    if conn:
+        conn.close()
 
 
 # @st.cache_data
