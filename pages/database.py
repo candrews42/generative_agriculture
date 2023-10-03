@@ -26,18 +26,18 @@ if mode == "remote":
 
 db_url = f'postgresql+psycopg2://{username}:{password}@{host}:{port}/{database}'
 
-try:
-    engine = sqlalchemy.create_engine(db_url)
-    conn = engine.connect()
-    query = "SELECT * FROM task_list;"
-    df = pd.read_sql(query, engine)
-    st.table(df)
-    st.write()
-except Exception as e:
-    st.write(f"An error occurred: {e}")
-finally:
-    if conn:
-        conn.close()
+# try:
+#     engine = sqlalchemy.create_engine(db_url)
+#     conn = engine.connect()
+#     query = "SELECT * FROM task_list;"
+#     df = pd.read_sql(query, engine)
+#     st.table(df)
+#     st.write()
+# except Exception as e:
+#     st.write(f"An error occurred: {e}")
+# finally:
+#     if conn:
+#         conn.close()
 
 
 # @st.cache_data
