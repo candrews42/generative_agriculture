@@ -32,7 +32,7 @@ try:
     query = "SELECT * FROM task_list;"
     df = pd.read_sql(query, engine)
     st.table(df)
-    st.write()
+    st.write(df)
 except Exception as e:
     st.write(f"An error occurred: {e}")
 # finally:
