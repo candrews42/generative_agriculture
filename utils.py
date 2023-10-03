@@ -2,7 +2,7 @@ import os
 import random
 import streamlit as st
 
-from api_keys import openai_key, postgresql_key 
+# from api_keys import openai_key, postgresql_key 
 mode = "local"
 # mode = "cloud"
 
