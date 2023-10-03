@@ -62,19 +62,9 @@ class generative_agriculture:
             database = st.secrets["database"]  # Name of database ('postgres' by default)
 
         db_url = f'postgresql+psycopg2://{username}:{password}@{host}:{port}/{database}'
-        db = SQLDatabase.from_uri(db_url)
-
         print("setting up SQL database connection")
-        # _self.engine = create_engine(st.secrets["postgresql_key"])
-        # try:
-        #     _self.engine = create_engine(db_url)
-        #     conn = _self.engine.connect()
-        # except Exception as e:
-        #     st.write(f"An error occurred: {e}")
-        # # finally:
-        # #     if conn:
-        # #         conn.close()
-
+        print(db_url)
+        db = SQLDatabase.from_uri(db_url)
         print("database connection complete")
         # 3. Setup llms
         # 3.1 Tools and Toolkit Setup
