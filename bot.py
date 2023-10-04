@@ -19,7 +19,6 @@ from langchain.prompts import PromptTemplate
 from langchain.chains import ConversationChain
 from langchain.utilities import WikipediaAPIWrapper
 from sqlalchemy import create_engine
-from langchain import SQLDatabase, SQLDatabaseChain
 # import psycopg2
 
 import streamlit as st
@@ -93,25 +92,20 @@ class generative_agriculture:
         #     memory=chatbot_memory, 
         #     prompt=chatbot_prompt_template, 
         #     verbose=True)
-        # # sql agent initialization
-        # sql_agent = create_sql_agent(
-        #     llm=OpenAI(temperature=0),
-        #     toolkit=toolkit,
-        #     verbose=True,
-        #     memory=sqlagent_memory,
-        #     agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
-        #     # agent_kwargs={
-        #     #     'prefix': prompt_for_sql_agent
-        #     # }
-        # )
+        # sql agent initialization
+        sql_agent = create_sql_agent(
+            llm=OpenAI(temperature=0),
+            toolkit=toolkit,
+            verbose=True,
+            # memory=sqlagent_memory,
+            agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
+            # agent_kwargs={
+            #     'prefix': prompt_for_sql_agent
+            # }
+        )
         # memory = ConversationBufferMemory()
         # llm = OpenAI(model_name=_self.openai_model, temperature=0, streaming=True)
         # chatbot_agent = ConversationChain(llm=llm, memory=memory, verbose=True)
-        
-        sql_agent = SQLDatabaseChain(
-            llm=llm, 
-            database=db, 
-            verbose=True)
         
         return sql_agent #, sql_agent
     
