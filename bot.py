@@ -37,22 +37,14 @@ class generative_agriculture:
     def __init__(self):
         # os.environ['OPENAI_API_KEY'] = openai_key
         utils.configure_openai_api_key()
-        self.openai_model = "gpt-3.5-turbo-instruct"
+        #self.openai_model = "gpt-3.5-turbo-instruct"
         #self.openai_model = "gpt-3.5-turbo"
-        #self.openai_model = "gpt-4-0613"
+        self.openai_model = "gpt-4-0613"
         # self.openai_model = "gpt-4-32k" # 4x context length of gpt-4
        
     @st.cache_resource
     def setup_chain(_self):
         # Database Connection
-        # db = SQLDatabase.from_uri(postgresql_key)
-        # username = st.secrets["username"]  # DB username
-        # password = st.secrets["password"]  # DB password
-        # host = st.secrets["host"]  # Public IP address for your instance
-        # port = st.secrets["port"]
-        # database = st.secrets["database"]  # Name of database ('postgres' by default)
-        # from api_keys import username, password, host, port, database
-
         mode = "remote"
         if mode == "remote":
             username = st.secrets["username"]  # DB username
@@ -63,9 +55,9 @@ class generative_agriculture:
 
         db_url = f'postgresql+psycopg2://{username}:{password}@{host}:{port}/{database}'
         print("setting up SQL database connection")
-        print(db_url)
         db = SQLDatabase.from_uri(db_url)
         print("database connection complete")
+
         # 3. Setup llms
         # 3.1 Tools and Toolkit Setup
         # tools = load_tools(["llm-math"], llm=OpenAI(temperature=0.1))
@@ -74,7 +66,6 @@ class generative_agriculture:
         # 3.2 Memory Setup
         chatbot_memory = ConversationBufferMemory()# input_key='human_input', memory_key='chatbot_history')
         sqlagent_memory = ConversationBufferMemory() #input_key='chatbot_output', memory_key='sqlagent_history')
-
         
         llm=OpenAI(model_name=_self.openai_model, temperature=0.1, streaming=True)
         # initialize bot instruction templates
@@ -94,7 +85,7 @@ class generative_agriculture:
         #     verbose=True)
         # sql agent initialization
         sql_agent = create_sql_agent(
-            llm=OpenAI(temperature=0),
+            llm=llm,
             toolkit=toolkit,
             verbose=True,
             # memory=sqlagent_memory,
