@@ -2,11 +2,13 @@
 import os
 import utils
 import streamlit as st
-from langchain.agents import create_sql_agent, AgentType, OpenAI
+from langchain.agents import create_sql_agent, AgentExecutor, load_tools, AgentType, initialize_agent
+from langchain.llms import OpenAI
 from langchain.sql_database import SQLDatabase
-from langchain.memory import ConversationBufferMemory
-from langchain.utilities import StreamHandler
 from langchain.agents.agent_toolkits import SQLDatabaseToolkit
+from streaming import StreamHandler
+from langchain.memory import ConversationBufferMemory, ConversationBufferWindowMemory
+from langchain.prompts import PromptTemplate
 # from langchain_experimental.sql import SQLDatabaseChain
 
 # Define the main class for the Generative Agriculture Chatbot
