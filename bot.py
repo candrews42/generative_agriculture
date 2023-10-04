@@ -54,6 +54,7 @@ class generative_agriculture:
         mode = "remote"
         # from api_keys import username, password, host, port, database
 
+        mode = "remote"
         if mode == "remote":
             username = st.secrets["username"]  # DB username
             password = st.secrets["password"]  # DB password
