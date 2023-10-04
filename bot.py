@@ -67,7 +67,7 @@ class generative_agriculture:
         chatbot_memory = ConversationBufferMemory()# input_key='human_input', memory_key='chatbot_history')
         sqlagent_memory = ConversationBufferMemory() #input_key='chatbot_output', memory_key='sqlagent_history')
         
-        llm=OpenAI(model_name=_self.openai_model, temperature=0.1, streaming=True)
+        llm=OpenAI(temperature=0.1, streaming=True) #model_name=_self.openai_model, 
         # initialize bot instruction templates
         # chatbot_prompt_template = PromptTemplate(
         #     input_variables = ['human_input'],
