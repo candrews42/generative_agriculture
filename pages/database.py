@@ -58,6 +58,7 @@ if st.button('Execute SQL Query'):
             st.table(df_custom)
         else:
             result = conn.execute(sql_query)
+            conn.execute("COMMIT;")  # Commit the transaction if it's a write operation
             st.write(f"Query executed successfully. Rows affected: {result.rowcount}")
     except Exception as e:
         st.write(f"An error occurred: {e}")
