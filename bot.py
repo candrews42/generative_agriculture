@@ -109,8 +109,8 @@ class generative_agriculture:
             utils.display_msg(user_query, 'user')
             with st.chat_message("assistant"):
                 st_cb = StreamHandler(st.empty())
-                sql_agent_response = sqlbot_instructions.format(query_request=user_query)
-                sql_response = sql_agent.run(sql_agent_response, callbacks=[st_cb])
+                #sql_agent_response = sqlbot_instructions.format(query_request=user_query)
+                sql_response = sql_agent.run(user_query, command=sqlbot_instructions, callbacks=[st_cb])
                 # sql_response = sql_agent.run(chatbot_response, callbacks=[st_cb])
                 st.session_state.messages.append({"role": "assistant", "content": sql_response})
                 st.rerun()
