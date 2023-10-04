@@ -9,6 +9,7 @@ st.sidebar.header("Database")
 st.write("This demo shows database access to the SQL database")
 
 # Database Connection
+mode = "remote"
 if mode == "remote":
     username = st.secrets["username"]  # DB username
     password = st.secrets["password"]  # DB password

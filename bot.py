@@ -51,7 +51,6 @@ class generative_agriculture:
         # host = st.secrets["host"]  # Public IP address for your instance
         # port = st.secrets["port"]
         # database = st.secrets["database"]  # Name of database ('postgres' by default)
-        mode = "remote"
         # from api_keys import username, password, host, port, database
 
         mode = "remote"
