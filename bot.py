@@ -37,9 +37,9 @@ class generative_agriculture:
     def __init__(self):
         # os.environ['OPENAI_API_KEY'] = openai_key
         utils.configure_openai_api_key()
-        #self.openai_model = "gpt-3.5-turbo-instruct"
+        self.openai_model = "gpt-3.5-turbo-instruct"
         #self.openai_model = "gpt-3.5-turbo"
-        self.openai_model = "gpt-4-0613"
+        #self.openai_model = "gpt-4-0613"
         # self.openai_model = "gpt-4-32k" # 4x context length of gpt-4
        
     @st.cache_resource
@@ -109,8 +109,8 @@ class generative_agriculture:
             utils.display_msg(user_query, 'user')
             with st.chat_message("assistant"):
                 st_cb = StreamHandler(st.empty())
-                #sql_agent_response = sqlbot_instructions.format(query_request=user_query)
-                sql_response = sql_agent.run(user_query, command=sqlbot_instructions, callbacks=[st_cb])
+                sql_agent_response = sqlbot_instructions.format(query_request=user_query)
+                sql_response = sql_agent.run(sql_agent_response, callbacks=[st_cb])
                 # sql_response = sql_agent.run(chatbot_response, callbacks=[st_cb])
                 st.session_state.messages.append({"role": "assistant", "content": sql_response})
                 st.rerun()
