@@ -53,7 +53,11 @@ if table_option != 'Select table':
 sql_query = st.text_area("Enter your SQL query here:", height=200)
 if st.button('Execute SQL Query'):
     try:
-        df_custom = pd.read_sql(sql_query, engine)
-        st.table(df_custom)
+        if sql_query.lower().startswith('select'):
+            df_custom = pd.read_sql(sql_query, engine)
+            st.table(df_custom)
+        else:
+            result = conn.execute(sql_query)
+            st.write(f"Query executed successfully. Rows affected: {result.rowcount}")
     except Exception as e:
         st.write(f"An error occurred: {e}")
