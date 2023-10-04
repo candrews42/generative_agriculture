@@ -38,8 +38,8 @@ class generative_agriculture:
         # os.environ['OPENAI_API_KEY'] = openai_key
         utils.configure_openai_api_key()
         #self.openai_model = "gpt-3.5-turbo-instruct"
-        self.openai_model = "gpt-3.5-turbo"
-        #self.openai_model = "gpt-4-0613"
+        #self.openai_model = "gpt-3.5-turbo"
+        self.openai_model = "gpt-4-0613"
         # self.openai_model = "gpt-4-32k" # 4x context length of gpt-4
        
     @st.cache_resource
@@ -122,7 +122,7 @@ class generative_agriculture:
                 sql_response = sql_agent.run(sql_agent_response, callbacks=[st_cb])
                 # sql_response = sql_agent.run(chatbot_response, callbacks=[st_cb])
                 st.session_state.messages.append({"role": "assistant", "content": sql_response})
-                st.experimental_rerun()
+                st.rerun()
                 # else:
                 #    chatbot_response = chatbot_agent.run(user_query, callbacks=[st_cb])
                 #    st.session_state.messages.append({"role": "chatbot", "content": chatbot_response})
