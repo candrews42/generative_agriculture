@@ -19,6 +19,7 @@ from langchain.prompts import PromptTemplate
 from langchain.chains import ConversationChain
 from langchain.utilities import WikipediaAPIWrapper
 from sqlalchemy import create_engine
+from langchain import SQLDatabase, SQLDatabaseChain
 # import psycopg2
 
 import streamlit as st
@@ -78,47 +79,53 @@ class generative_agriculture:
         
         llm=OpenAI(model_name=_self.openai_model, temperature=0.1, streaming=True)
         # initialize bot instruction templates
-        chatbot_prompt_template = PromptTemplate(
-            input_variables = ['human_input'],
-            template=chatbot_instructions
-        )
-        sql_prompt_template = PromptTemplate(
-            input_variables = ['chatbot_output'],
-            template=sqlbot_instructions
-        )
+        # chatbot_prompt_template = PromptTemplate(
+        #     input_variables = ['human_input'],
+        #     template=chatbot_instructions
+        # )
+        # sql_prompt_template = PromptTemplate(
+        #     input_variables = ['chatbot_output'],
+        #     template=sqlbot_instructions
+        # )
         # initialize agents
-        chatbot_agent = LLMChain(
-            llm=llm, 
-            memory=chatbot_memory, 
-            prompt=chatbot_prompt_template, 
-            verbose=True)
-        # sql agent initialization
-        sql_agent = create_sql_agent(
-            llm=OpenAI(temperature=0),
-            toolkit=toolkit,
-            verbose=True,
-            memory=sqlagent_memory,
-            agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
-            # agent_kwargs={
-            #     'prefix': prompt_for_sql_agent
-            # }
-        )
+        # chatbot_agent = LLMChain(
+        #     llm=llm, 
+        #     memory=chatbot_memory, 
+        #     prompt=chatbot_prompt_template, 
+        #     verbose=True)
+        # # sql agent initialization
+        # sql_agent = create_sql_agent(
+        #     llm=OpenAI(temperature=0),
+        #     toolkit=toolkit,
+        #     verbose=True,
+        #     memory=sqlagent_memory,
+        #     agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
+        #     # agent_kwargs={
+        #     #     'prefix': prompt_for_sql_agent
+        #     # }
+        # )
         # memory = ConversationBufferMemory()
         # llm = OpenAI(model_name=_self.openai_model, temperature=0, streaming=True)
         # chatbot_agent = ConversationChain(llm=llm, memory=memory, verbose=True)
+        
+        sql_agent = SQLDatabaseChain(
+            llm=llm, 
+            database=db, 
+            verbose=True)
+        
         return sql_agent #, sql_agent
     
     @utils.enable_chat_history
     def main(self):
-        chatbot_agent = self.setup_chain()
+        sql_agent = self.setup_chain()
         # chatbot_agent, sql_agent = self.setup_chain()
         user_query = st.chat_input(placeholder="Enter your observation or question about the farm")
         if user_query:
             utils.display_msg(user_query, 'user')
             with st.chat_message("assistant"):
                 st_cb = StreamHandler(st.empty())
-                chatbot_response = sqlbot_instructions.format(chatbot_output=user_query)
-                sql_response = chatbot_agent.run(chatbot_response, callbacks=[st_cb])
+                sql_agent_response = sqlbot_instructions.format(query_request=user_query)
+                sql_response = sql_agent.run(sql_agent_response, callbacks=[st_cb])
                 # sql_response = sql_agent.run(chatbot_response, callbacks=[st_cb])
                 st.session_state.messages.append({"role": "assistant", "content": sql_response})
                 # st.write(sql_response)
