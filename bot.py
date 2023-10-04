@@ -11,6 +11,11 @@ from langchain.memory import ConversationBufferMemory, ConversationBufferWindowM
 from langchain.prompts import PromptTemplate
 # from langchain_experimental.sql import SQLDatabaseChain
 
+# Streamlit page setup
+st.set_page_config(page_title="GenAg Chatbot", page_icon="🌱", layout="wide")
+st.header("Generative Agriculture Chatbot")
+st.write("Natural language farm management tool")
+
 # Define the main class for the Generative Agriculture Chatbot
 class GenerativeAgriculture:
     # Initialize chatbot settings and API keys
@@ -60,8 +65,5 @@ class GenerativeAgriculture:
 
 # Entry point of the application
 if __name__ == "__main__":
-    st.set_page_config(page_title="GenAg Chatbot", page_icon="🌱", layout="wide")
-    st.header("Generative Agriculture Chatbot")
-    st.write("Natural language farm management tool")
     obj = GenerativeAgriculture()
     obj.main()
