@@ -28,7 +28,7 @@ class GenerativeAgriculture:
 
     # Setup database and agent chain
     @st.cache_resource
-    def setup_chain(self):
+    def setup_chain(_self):
         # Database Connection
         username, password, host, port, database = [st.secrets[key] for key in ["username", "password", "host", "port", "database"]]
         db_url = f'postgresql+psycopg2://{username}:{password}@{host}:{port}/{database}'
