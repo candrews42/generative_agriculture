@@ -27,30 +27,33 @@ except Exception as e:
     st.write(f"An error occurred: {e}")
     exit()
 
-# Table Buttons
-if st.button('Load Raw Observations'):
-    query = "SELECT * FROM raw_observations;"
-elif st.button('Load Compost Piles'):
-    query = "SELECT * FROM compost_piles;"
-elif st.button('Load Compost Pile Ingredients'):
-    query = "SELECT * FROM compost_pile_ingredients;"
-elif st.button('Load Compost Observations'):
-    query = "SELECT * FROM compost_observations;"
-elif st.button('Load Task List'):
-    query = "SELECT * FROM task_list;"
-elif st.button('Load Team Members'):
-    query = "SELECT * FROM team_members;"
-elif st.button('Load Plant Tracker'):
-    query = "SELECT * FROM plant_tracker;"
-elif st.button('Load Harvest Tracker'):
-    query = "SELECT * FROM harvest_tracker;"
-else:
-    query = None
+# Dropdown for Table Selection
+table_option = st.selectbox('Choose a table', ['Select table', 'Raw Observations', 'Compost Piles', 'Compost Pile Ingredients', 'Compost Observations', 'Task List', 'Team Members', 'Plant Tracker', 'Harvest Tracker'])
+query_map = {
+    'Raw Observations': 'SELECT * FROM raw_observations;',
+    'Compost Piles': 'SELECT * FROM compost_piles;',
+    'Compost Pile Ingredients': 'SELECT * FROM compost_pile_ingredients;',
+    'Compost Observations': 'SELECT * FROM compost_observations;',
+    'Task List': 'SELECT * FROM task_list;',
+    'Team Members': 'SELECT * FROM team_members;',
+    'Plant Tracker': 'SELECT * FROM plant_tracker;',
+    'Harvest Tracker': 'SELECT * FROM harvest_tracker;'
+}
 
 # Execute Query and Display Table
-if query is not None:
+if table_option != 'Select table':
+    query = query_map[table_option]
     try:
         df = pd.read_sql(query, engine)
         st.table(df)
+    except Exception as e:
+        st.write(f"An error occurred: {e}")
+
+# SQL Query Input
+sql_query = st.text_area("Enter your SQL query here:", height=200)
+if st.button('Execute SQL Query'):
+    try:
+        df_custom = pd.read_sql(sql_query, engine)
+        st.table(df_custom)
     except Exception as e:
         st.write(f"An error occurred: {e}")
