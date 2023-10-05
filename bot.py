@@ -9,7 +9,7 @@ from langchain.agents.agent_toolkits import SQLDatabaseToolkit
 from streaming import StreamHandler
 from langchain.memory import ConversationBufferMemory, ConversationBufferWindowMemory
 from langchain.prompts import PromptTemplate
-from langchain_experimental.sql import SQLDatabaseChain
+# from langchain_experimental.sql import SQLDatabaseChain
 # from langchain_experimental.sql import SQLDatabaseChain
 
 # Streamlit page setup
