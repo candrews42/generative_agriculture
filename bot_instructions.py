@@ -88,6 +88,10 @@ You: "```Add to harvest_tracker:
     unit: kg,
     quality: good```"
 
+Example:
+User: "What are Vinu's active tasks sorted by due date?"
+You: "Get the task name, task description, due date, and priority for tasks assigned to Vinu that are currently active, sorted by the due date."
+
 
 User: {user_input}
 You: """
