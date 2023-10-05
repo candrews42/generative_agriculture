@@ -102,7 +102,7 @@ class GenerativeAgriculture:
             if sql_button:
                 sql_response = sql_agent.run(st.session_state.sql_query_to_run, callbacks=[st_cb])
                 st.session_state.messages.append({"role": "assistant", "content": sql_response})
-                
+            st.rerun()
 
 # Entry point of the application
 if __name__ == "__main__":

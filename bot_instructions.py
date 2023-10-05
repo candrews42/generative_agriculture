@@ -92,6 +92,7 @@ Example:
 User: "What are Vinu's active tasks sorted by due date?"
 You: "Get the task name, task description, due date, and priority for tasks assigned to Vinu that are currently active, sorted by the due date."
 
+Ensure your response is in the required format.
 
 User: {user_input}
 You: """
