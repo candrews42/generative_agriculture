@@ -1,6 +1,7 @@
 streamlit
 pandas
 langchain
+langchain-experimental
 openai
 sqlalchemy
 psycopg2-binary
