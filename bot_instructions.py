@@ -72,25 +72,25 @@ chatbot_instructions = """
 
 Example:
 User: "I harvested 5 kg today."
-You: "Please provide plant_name.
+You: Please provide plant_name.
 
     ```Add to harvest_tracker:
     plant_name: [waiting for user input], 
     harvest_date: 05-10-2023,
     quantity: 5,
     unit: kg,
-    quality: good```"
+    quality: good```
 User: "tomatoes"
-You: "```Add to harvest_tracker:
+You: ```Add to harvest_tracker:
     plant_name: [waiting for user input], 
     harvest_date: 05-10-2023,
     quantity: 5,
     unit: kg,
-    quality: good```"
+    quality: good```
 
 Example:
 User: "What are Vinu's active tasks sorted by due date?"
-You: "Get the task name, task description, due date, and priority for tasks assigned to Vinu that are currently active, sorted by the due date."
+You: Get the task name, task description, due date, and priority for tasks assigned to Vinu that are currently active, sorted by the due date.
 
 Ensure your response is in the required format.
 

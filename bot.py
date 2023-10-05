@@ -89,9 +89,6 @@ class GenerativeAgriculture:
                 # TODO run the below query to add user_query to raw_observations table
                 # raw_observation = f"INSERT INTO raw_observations (observation) VALUES ('{user_query}');"
                 st_cb = StreamHandler(st.empty())
-                if sql_response:
-                    st.session_state.messages.append({"role": "assistant", "content": sql_response})
-                
                 #formatted_user_query = chatbot_instructions.format(user_input=user_query)
                 chatbot_response = chatbot_agent.run(user_query, callbacks=[st_cb])
                 st.session_state.sql_query_to_run = chatbot_response
@@ -99,11 +96,14 @@ class GenerativeAgriculture:
                 # TODO if streamlit button pressed "Run Query", run the below query using the sql agent
             sql_button = st.button('Execute SQL Query')
             if sql_button:
-                sql_response = sql_agent.run(st.session_state.sql_query_to_run, callbacks=[st_cb])
-                st.session_state.messages.append({"role": "assistant", "content": sql_response})
-                st.rerun()
-            # st.rerun()
-
+                with st.chat_message("assistant"):
+                    st_cb = StreamHandler(st.empty())
+                    #formatted_user_query = chatbot_instructions.format(user_input=user_query)
+                    sql_response = sql_agent.run(chatbot_response, callbacks=[st_cb])
+                    # sql_response = sql_agent.run(st.session_state.sql_query_to_run, callbacks=[st_cb])
+                    st.session_state.messages.append({"role": "assistant", "content": sql_response})
+                    # TODO if streamlit button pressed "Run Query", run the below query using the sql agent
+                
 # Entry point of the application
 if __name__ == "__main__":
     obj = GenerativeAgriculture()
