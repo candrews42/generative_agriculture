@@ -10,8 +10,8 @@ from streaming import StreamHandler
 from langchain.memory import ConversationBufferMemory, ConversationBufferWindowMemory
 from langchain.prompts import PromptTemplate
 import sqlalchemy
-# from langchain_experimental.sql import SQLDatabaseChain
-# from langchain_experimental.sql import SQLDatabaseChain
+from bot_instructions import chatbot_instructions, sqlbot_instructions
+from langchain.chains import LLMChain, SequentialChain
 
 # Streamlit page setup
 st.set_page_config(page_title="GenAg Chatbot", page_icon="🌱") #, layout="wide")
@@ -48,12 +48,13 @@ class GenerativeAgriculture:
         chatbot_memory = ConversationBufferMemory()
         # sqlagent_memory = ConversationBufferMemory()
 
-        # Setup Chatbot and agent
-        chatbot_agent = OpenAI(
-            temperature=0.1, 
-            memory=chatbot_memory,
-            streaming=True,
-            )
+        # Setup Chatbot
+        llm=OpenAI(model_name=_self.openai_model, temperature=0.1, streaming=True)
+        chatbot_agent = LLMChain(
+            llm=llm, 
+            memory=chatbot_memory, 
+            prompt=chatbot_instructions, 
+            verbose=True)
         
         # Setup SQL toolkit and agent
         toolkit = SQLDatabaseToolkit(db=db, llm=OpenAI(temperature=0))
@@ -83,7 +84,8 @@ class GenerativeAgriculture:
                 # TODO run the below query to add user_query to raw_observations table
                 # raw_observation = f"INSERT INTO raw_observations (observation) VALUES ('{user_query}');"
                 st_cb = StreamHandler(st.empty())
-                chatbot_response = chatbot_agent.run(user_query, callbacks=[st_cb])
+                formatted_user_query = chatbot_instructions.format(user_input=user_query)
+                chatbot_response = chatbot_agent.run(formatted_user_query, callbacks=[st_cb])
                 st.session_state.messages.append({"role": "assistant", "content": chatbot_response})
     
                 # TODO if streamlit button pressed "Run Query", run the below query using the sql agent
