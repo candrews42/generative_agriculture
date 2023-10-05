@@ -49,11 +49,15 @@ class GenerativeAgriculture:
         # sqlagent_memory = ConversationBufferMemory()
 
         # Setup Chatbot
+        chatbot_prompt_template = PromptTemplate(
+            input_variables = ['user_input'],
+            template=chatbot_instructions
+        )
         llm=OpenAI(model_name=_self.openai_model, temperature=0.1, streaming=True)
         chatbot_agent = LLMChain(
             llm=llm, 
             memory=chatbot_memory, 
-            #prompt=chatbot_instructions, 
+            prompt=chatbot_prompt_template, 
             verbose=True)
         
         # Setup SQL toolkit and agent
@@ -84,8 +88,8 @@ class GenerativeAgriculture:
                 # TODO run the below query to add user_query to raw_observations table
                 # raw_observation = f"INSERT INTO raw_observations (observation) VALUES ('{user_query}');"
                 st_cb = StreamHandler(st.empty())
-                formatted_user_query = chatbot_instructions.format(user_input=user_query)
-                chatbot_response = chatbot_agent.run(formatted_user_query, callbacks=[st_cb])
+                #formatted_user_query = chatbot_instructions.format(user_input=user_query)
+                chatbot_response = chatbot_agent.run(user_query, callbacks=[st_cb])
                 st.session_state.messages.append({"role": "assistant", "content": chatbot_response})
     
                 # TODO if streamlit button pressed "Run Query", run the below query using the sql agent
