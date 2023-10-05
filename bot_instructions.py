@@ -43,9 +43,9 @@ chatbot_instructions = """
     - category: task category [planting, maintenance, harvest, organization, animals]
     - task_name: short description; ""
     - task_description: description; ""
-    - task_status: status; "pending"
+    - task_status: status; "active"
     - assignee: assigned person references team_members
-    - due_date: due date; "unknown"
+    - due_date: due date; 1 week from today()
     - priority: priority; "medium"
 
     # team_members

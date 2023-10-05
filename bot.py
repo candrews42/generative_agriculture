@@ -45,7 +45,7 @@ class GenerativeAgriculture:
             exit()
         
         # Initialize memory setup (commented out for future use)
-        chatbot_memory = ConversationBufferMemory()
+        chatbot_memory = ConversationBufferWindowMemory(k=5)
         # sqlagent_memory = ConversationBufferMemory()
 
         # Setup Chatbot
@@ -53,7 +53,7 @@ class GenerativeAgriculture:
             input_variables = ['user_input'],
             template=chatbot_instructions
         )
-        llm=OpenAI(model_name=_self.openai_model, temperature=0.1, streaming=True)
+        llm=OpenAI(model_name=_self.openai_model, temperature=0.0, streaming=True)
         chatbot_agent = LLMChain(
             llm=llm, 
             memory=chatbot_memory, 
