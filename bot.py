@@ -13,20 +13,9 @@ from langchain.prompts import PromptTemplate
 # from langchain_experimental.sql import SQLDatabaseChain
 
 # Streamlit page setup
-st.set_page_config(page_title="GenAg Chatbot", page_icon="🌱", layout="wide")
-st.title("Generative Agriculture Chatbot 🌱")
+st.set_page_config(page_title="GenAg Chatbot", page_icon="🌱") #, layout="wide")
+st.header("Generative Agriculture Chatbot")
 st.write("Natural language farm management tool")
-st.sidebar.header("Quick Actions")
-
-# Quick action buttons in sidebar
-if st.sidebar.button('Count Chicken Eggs'):
-    st.write("Query to count chicken eggs in the harvest table here.")
-if st.sidebar.button('List Active Tasks'):
-    st.write("Query to list active tasks here.")
-if st.sidebar.button('Add a Task'):
-    task = st.sidebar.text_input("Task Description:")
-    if task:
-        st.write(f"Added task: {task}")
 
 # Define the main class for the Generative Agriculture Chatbot
 class GenerativeAgriculture:
@@ -64,11 +53,9 @@ class GenerativeAgriculture:
     @utils.enable_chat_history
     def main(self):
         sql_agent = self.setup_chain()
-        user_query = st.text_input("Enter your observation or question about the farm:", key="user_input")
-        if st.button('Send'):
-            with st.expander("Chat History", expanded=True):
-                st.write(f"You: {user_query}")
-                st.write("Chatbot is processing...")
+        user_query = st.chat_input(placeholder="Enter your observation or question about the farm")
+        if user_query:
+            utils.display_msg(user_query, 'user')
             # TODO: Add user_query to raw_observations table
             with st.chat_message("assistant"):
                 st_cb = StreamHandler(st.empty())
