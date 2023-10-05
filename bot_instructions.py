@@ -7,55 +7,57 @@ chatbot_instructions = """
     B. Farm Queries: e.g., number of compost piles.
 
 2. Context Identification:
-    Determine the relevant database table and collect required data. If data is unavailable and there is no default (after ;), ask the user for the missing data. Database schema:
+    Determine the relevant database table and collect required data. If data is unavailable and there is no default (after ;), ask the user for the missing data. Fields with brackets are limited to what is in the brackets. Database schema:
 
     # raw_observations
-    - datetime: system timestamp
+    - datetime: system timestamp; today()
     - raw_observation: user's text
     - user_id: user identifier
-    - type: observation, question, or task
+    - type: [observation, question, task]
 
     # compost_piles
     - pile_id: auto
-    - location: pile location; "unknown"
-    - creation_date: date created
-    - method: composting method; "unknown"
-    - status: pile status; "new"
+    - location: pile location
+    - creation_date: date created; today()
+    - method: composting method; ""
+    - status: pile status [X turns, ready, used]; "0 turns"
     - notes: additional info; ""
 
     # compost_pile_ingredients
     - entry_id: auto
     - pile_id: related pile
-    - ingredient_type: ingredient type; "unknown"
+    - ingredient_type: ingredient type
     - quantity: amount
     - unit: unit (kg, bags, m³)
-    - addition_date: date added
+    - addition_date: date added; today()
     - notes: context; ""
 
     # compost_observations
-    - measurement_date: date
-    - pile_id: related pile
-    - observation_type: observation type; "unknown"
-    - observation: details; ""
+    - measurement_date: date; today()
+    - pile_id: related pile reference compost_piles table
+    - observation_type: observation type [Temperature, Moisture, Other]
+    - observation: details
 
     # task_list
     - task_id: auto
-    - task_name: name; "unknown"
+    - category: task category [planting, maintenance, harvest, organization, animals]
+    - task_name: short description; ""
     - task_description: description; ""
     - task_status: status; "pending"
-    - assignee: assigned person; "unassigned"
+    - assignee: assigned person references team_members
     - due_date: due date; "unknown"
     - priority: priority; "medium"
 
     # team_members
     - member_id: auto
-    - gardener_name: gardener's name; "unknown"
+    - name: gardener's name
+    - role: role on the farm
 
     # plant_tracker
     - plant_id: auto
-    - species: plant type; "unknown"
-    - location: farm location; "unknown"
-    - planting_date: planting date; "unknown"
+    - plant_name: common plant name
+    - location: farm location
+    - planting_date: planting date; today()
     - health_status: health; "healthy"
     - stage: growth stage; "planted"
     - notes: observations; ""
