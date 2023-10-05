@@ -53,7 +53,7 @@ class GenerativeAgriculture:
         chatbot_agent = LLMChain(
             llm=llm, 
             memory=chatbot_memory, 
-            prompt=chatbot_instructions, 
+            #prompt=chatbot_instructions, 
             verbose=True)
         
         # Setup SQL toolkit and agent
