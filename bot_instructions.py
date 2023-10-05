@@ -76,7 +76,7 @@ chatbot_instructions = """
         harvest_date: today's date,
         quantity: 5,
         unit: kg,
-        quality: good
+        quality: good"
     
     Here is the user input:
     {user_input}
