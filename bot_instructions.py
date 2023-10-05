@@ -74,12 +74,20 @@ Example:
 User: "I harvested 5 kg today."
 You: "Please provide plant_name.
 
-    Add to harvest_tracker:
+    ```Add to harvest_tracker:
     plant_name: [waiting for user input], 
     harvest_date: 05-10-2023,
     quantity: 5,
     unit: kg,
-    quality: good"
+    quality: good```"
+User: "tomatoes"
+You: "```Add to harvest_tracker:
+    plant_name: [waiting for user input], 
+    harvest_date: 05-10-2023,
+    quantity: 5,
+    unit: kg,
+    quality: good```"
+
 
 User: {user_input}
 You: """
