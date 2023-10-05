@@ -9,6 +9,7 @@ from langchain.agents.agent_toolkits import SQLDatabaseToolkit
 from streaming import StreamHandler
 from langchain.memory import ConversationBufferMemory, ConversationBufferWindowMemory
 from langchain.prompts import PromptTemplate
+import sqlalchemy
 # from langchain_experimental.sql import SQLDatabaseChain
 # from langchain_experimental.sql import SQLDatabaseChain
 
@@ -34,10 +35,25 @@ class GenerativeAgriculture:
         username, password, host, port, database = [st.secrets[key] for key in ["username", "password", "host", "port", "database"]]
         db_url = f'postgresql+psycopg2://{username}:{password}@{host}:{port}/{database}'
         db = SQLDatabase.from_uri(db_url)
+
+        # Initialize Database Connection
+        try:
+            engine = sqlalchemy.create_engine(db_url)
+            conn = engine.connect()
+        except Exception as e:
+            st.write(f"An error occurred: {e}")
+            exit()
         
         # Initialize memory setup (commented out for future use)
-        # chatbot_memory = ConversationBufferMemory()
+        chatbot_memory = ConversationBufferMemory()
         # sqlagent_memory = ConversationBufferMemory()
+
+        # Setup Chatbot and agent
+        chatbot_agent = OpenAI(
+            temperature=0.1, 
+            memory=chatbot_memory,
+            streaming=True,
+            )
         
         # Setup SQL toolkit and agent
         toolkit = SQLDatabaseToolkit(db=db, llm=OpenAI(temperature=0))
@@ -47,21 +63,33 @@ class GenerativeAgriculture:
             verbose=True,
             agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION
         )
-        return sql_agent
+        return chatbot_agent, sql_agent
     
     # Main function to handle user input and chatbot response
     @utils.enable_chat_history
     def main(self):
-        sql_agent = self.setup_chain()
+        chatbot_agent, sql_agent = self.setup_chain()
         user_query = st.chat_input(placeholder="Enter your observation or question about the farm")
         if user_query:
             utils.display_msg(user_query, 'user')
             # TODO: Add user_query to raw_observations table
+            # try:
+            #     conn.execute(sql_query)
+            #     st.write("Query executed successfully.")
+            # except Exception as e:
+            #     st.write(f"An error occurred: {e}")
+                
             with st.chat_message("assistant"):
+                # TODO run the below query to add user_query to raw_observations table
+                # raw_observation = f"INSERT INTO raw_observations (observation) VALUES ('{user_query}');"
                 st_cb = StreamHandler(st.empty())
-                sql_agent_response = f"INSERT INTO raw_observations (observation) VALUES ('{user_query}');"
-                sql_response = sql_agent.run(sql_agent_response, callbacks=[st_cb])
-                st.session_state.messages.append({"role": "assistant", "content": sql_response})
+                chatbot_response = chatbot_agent.run(user_query, callbacks=[st_cb])
+                st.session_state.messages.append({"role": "assistant", "content": chatbot_response})
+    
+                # TODO if streamlit button pressed "Run Query", run the below query using the sql agent
+                if st.button('Execute SQL Query'):
+                    sql_response = sql_agent.run(chatbot_response, callbacks=[st_cb])
+                    st.session_state.messages.append({"role": "assistant", "content": sql_response})
                 st.rerun()
 
 # Entry point of the application
