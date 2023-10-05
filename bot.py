@@ -23,9 +23,9 @@ class GenerativeAgriculture:
     # Initialize chatbot settings and API keys
     def __init__(self):
         utils.configure_openai_api_key()
-        self.openai_model = "gpt-3.5-turbo-instruct"
+        #self.openai_model = "gpt-3.5-turbo-instruct"
         #self.openai_model = "gpt-3.5-turbo"
-        #self.openai_model = "gpt-4-0613"
+        self.openai_model = "gpt-4-0613"
         # self.openai_model = "gpt-4-32k" # 4x context length of gpt-4
 
     # Setup database and agent chain
