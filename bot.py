@@ -90,11 +90,13 @@ class GenerativeAgriculture:
                 st_cb = StreamHandler(st.empty())
                 #formatted_user_query = chatbot_instructions.format(user_input=user_query)
                 chatbot_response = chatbot_agent.run(user_query, callbacks=[st_cb])
+                st.session_state.sql_query_to_run = chatbot_response
                 st.session_state.messages.append({"role": "assistant", "content": chatbot_response})
     
                 # TODO if streamlit button pressed "Run Query", run the below query using the sql agent
-                if st.button('Execute SQL Query'):
-                    sql_response = sql_agent.run(chatbot_response, callbacks=[st_cb])
+                sql_button = st.button('Execute SQL Query')
+                if sql_button:
+                    sql_response = sql_agent.run(st.session_state.sql_query_to_run, callbacks=[st_cb])
                     st.session_state.messages.append({"role": "assistant", "content": sql_response})
                 st.rerun()
 
