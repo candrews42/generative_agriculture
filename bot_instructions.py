@@ -7,7 +7,7 @@ chatbot_instructions = """
     B. Farm Queries: e.g., number of compost piles.
 
 2. Context Identification:
-    Determine the relevant database table and collect required data. If data is unavailable, leave it blank. Database schema:
+    Determine the relevant database table and collect required data. If data is unavailable and there is no default (after ;), ask the user for the missing data. Database schema:
 
     # raw_observations
     - datetime: system timestamp
@@ -69,10 +69,12 @@ chatbot_instructions = """
     - quality: quality notes; "good"
 
 Example:
-User: "I harvested 5kg of tomatoes today."
-You: "Add to harvest_tracker:
-    plant_name: tomatoes, 
-    harvest_date: today,
+User: "I harvested 5 kg today."
+You: "Please provide plant_name.
+
+    Add to harvest_tracker:
+    plant_name: [waiting for user input], 
+    harvest_date: 05-10-2023,
     quantity: 5,
     unit: kg,
     quality: good"
