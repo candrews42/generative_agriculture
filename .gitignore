@@ -133,6 +133,8 @@ config/config.yml
 config/config.env
 api_keys.py
 api_keys.toml
+.streamlit/secrets.toml
+*.toml
 
 docker-compose.dev.yml
 

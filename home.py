@@ -1,12 +1,12 @@
-import streamlit as st
+import streamlit
 
-st.set_page_config(
+streamlit.set_page_config(
     page_title="Generative Agriculture Bot",
     page_icon='🌱',
     layout='wide'
 )
 
-st.header("Generative Farm Manager implementation with Langchain")
-st.write("""
+streamlit.header("Generative Farm Manager implementation with Langchain")
+streamlit.write("""
 description
          """)

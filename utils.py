@@ -1,6 +1,6 @@
 import os
 import random
-import streamlit as st
+import streamlit
 
 # from api_keys import openai_key, postgresql_key 
 mode = "local"
@@ -12,21 +12,21 @@ def enable_chat_history(func):
 
         # to clear chat history after swtching chatbot
         current_page = func.__qualname__
-        if "current_page" not in st.session_state:
-            st.session_state["current_page"] = current_page
-        if st.session_state["current_page"] != current_page:
+        if "current_page" not in streamlit.session_state:
+            streamlit.session_state["current_page"] = current_page
+        if streamlit.session_state["current_page"] != current_page:
             try:
-                st.cache_resource.clear()
-                del st.session_state["current_page"]
-                del st.session_state["messages"]
+                streamlit.cache_resource.clear()
+                del streamlit.session_state["current_page"]
+                del streamlit.session_state["messages"]
             except:
                 pass
 
         # to show chat history on ui
-        if "messages" not in st.session_state:
-            st.session_state["messages"] = [{"role": "assistant", "content": "How can I help you?"}]
-        for msg in st.session_state["messages"]:
-            st.chat_message(msg["role"]).write(msg["content"])
+        if "messages" not in streamlit.session_state:
+            streamlit.session_state["messages"] = [{"role": "assistant", "content": "How can I help you?"}]
+        for msg in streamlit.session_state["messages"]:
+            streamlit.chat_message(msg["role"]).write(msg["content"])
 
     def execute(*args, **kwargs):
         func(*args, **kwargs)
@@ -39,20 +39,20 @@ def display_msg(msg, author):
         msg (str): message to display
         author (str): author of the message -user/assistant
     """
-    st.session_state.messages.append({"role": author, "content": msg})
-    st.chat_message(author).write(msg)
+    streamlit.session_state.messages.append({"role": author, "content": msg})
+    streamlit.chat_message(author).write(msg)
 
 def configure_openai_api_key():
     # openai_api_key = openai_key
     # if mode == "local":
     #     openai_api_key = openai_key
     # else:
-    openai_api_key = st.secrets["openai_key"]
+    openai_api_key = streamlit.secrets["openai_key"]
     if openai_api_key:
-        st.session_state['OPENAI_API_KEY'] = openai_api_key
+        streamlit.session_state['OPENAI_API_KEY'] = openai_api_key
         os.environ['OPENAI_API_KEY'] = openai_api_key
     else:
-        st.error("Please add your OpenAI API key to continue.")
-        st.info("Obtain your key from this link: https://platform.openai.com/account/api-keys")
-        st.stop()
+        streamlit.error("Please add your OpenAI API key to continue.")
+        streamlit.info("Obtain your key from this link: https://platform.openai.com/account/api-keys")
+        streamlit.stop()
     return openai_api_key
