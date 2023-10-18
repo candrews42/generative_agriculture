@@ -97,7 +97,8 @@ def chunk_tokens(text: str, token_limit: int) -> list:
 
 
 def load_data_into_vectorstore(client, docs: List[str]):
-    qdrant_client = Qdrant(client=client, collection_name="notion_streamlit", embeddings=OpenAIEmbeddings())
+    embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key)
+    qdrant_client = Qdrant(client=client, collection_name="notion_streamlit", embeddings=embeddings.embed_query)
     ids = qdrant_client.add_texts(docs)
     return ids
 
@@ -115,34 +116,27 @@ def connect_to_vectorstore():
         )
     return client
 
-
-import requests
-import json
-import streamlit as st
-
 @st.cache_data
 def cache_headers(notion_api_key: str):
-    headers = {
-        "Authorization": f"Bearer {notion_api_key}",
-        "Content-Type": "application/json",
-        "Notion-Version": "2022-06-28"
-    }
-    
-    query_payload = {
-        "query": "Farm Plan",  # Replace with your search query
-        "sort": {
-            "direction": "ascending",
-            "timestamp": "last_edited_time"
-        }
-    }
-    
-    res = requests.post("https://api.notion.com/v1/search", headers=headers, json=query_payload)
-    
-    print("\n")
-    print("notion response:")
-    print(res.json())
-    
+    headers = {"Authorization": f"Bearer {notion_api_key}", "Content-Type": "application/json",
+               "Notion-Version": "2022-06-28"}
     return headers
+    
+    # query_payload = {
+    #     "query": "Farm Plan",  # Replace with your search query
+    #     "sort": {
+    #         "direction": "ascending",
+    #         "timestamp": "last_edited_time"
+    #     }
+    # }
+    
+    # res = requests.post("https://api.notion.com/v1/search", headers=headers, json=query_payload)
+    
+    # print("\n")
+    # print("notion response:")
+    # print(res.json())
+    
+    # return headers
 
 
 
@@ -150,10 +144,9 @@ def cache_headers(notion_api_key: str):
 def load_chain(_client, api_key: str):
     if len(api_key) == 0:
         api_key = "temp value"
-    # embeddings = OpenAIEmbeddings(openai_api_key=api_key)
-    vectorstore = Qdrant(client=_client, collection_name="notion_streamlit", embeddings=OpenAIEmbeddings(openai_api_key=api_key))
+    embeddings = OpenAIEmbeddings(openai_api_key=api_key)
+    vectorstore = Qdrant(client=_client, collection_name="notion_streamlit", embeddings=embeddings.embed_query)
     chain = ConversationalRetrievalChain.from_llm(
-            #TODO update to selected model
             llm=ChatOpenAI(temperature=0.0, model_name='gpt-3.5-turbo',
             openai_api_key=api_key),
             retriever=vectorstore.as_retriever()
