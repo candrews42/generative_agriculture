@@ -20,7 +20,7 @@ from langchain.chains import LLMChain, SequentialChain
 # Streamlit page setup
 st.set_page_config(page_title="GenAg Image Asset Generator", page_icon="🌱") #, layout="wide")
 st.header("Generative Agriculture Image Asset Generator")
-st.write("Natural language farm management tool")
+st.write("This is a proof of concept showing that users can take pictures of their physical farm assets and they could be converted into digital assets that could be represented on a map of their farm. The tool isn't great, but it takes only a small update from OpenAI API that I expect to happen soon to be much, much better.")
 
 # Define the main class for the Generative Agriculture Chatbot
 class GenerativeAgriculture:

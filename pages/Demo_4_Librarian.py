@@ -22,7 +22,7 @@ warnings.filterwarnings('ignore')
 # Configuration and Markdown
 st.set_page_config(page_title="Librarian", page_icon="📚")
 st.header("Librarian for Generative Agriculture")
-st.write("Explore the raw observations.")
+st.write("Explore the raw observations by asking a question. Try, 'have we seen any bugs on our plants?'")
 
 # Setup database and agent chain
 @st.cache(allow_output_mutation=True)
@@ -83,7 +83,7 @@ chatbot_agent = setup_chain(chatbot_instructions)  # Setup bot
 try:
     query = "SELECT * FROM raw_observations ORDER BY time_observed DESC LIMIT 7;"
     df = pd.read_sql(query, engine)
-    st.write("### Most Recent 50 Entries in raw_observations")
+    st.write("### Most Recent Entries in raw_observations")
     
     # Replace Base64 image strings with the word "Image"
     df['image'] = df['image'].apply(lambda x: "Image" if x else "No Image")

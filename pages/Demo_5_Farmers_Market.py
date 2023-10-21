@@ -13,7 +13,7 @@ warnings.filterwarnings('ignore')
 # Configuration and Markdown
 st.set_page_config(page_title="Farmers Market Chatbot", page_icon="🌽")
 st.header("Farmers Market Demo")
-st.write("Welcome to the Farmers Market demo. Here, you can simulate buying or selling garden-related items.")
+st.write("Welcome to the Farmers Market demo. Here, you can simulate buying or selling garden-related items with a multi-attribute double-sided auction. Try selecting 'Buy' on the side panel, and asking for 'carrots within 20 km grown with no pesticides and from a certified organic farm.'")
 
 # Setup database and agent chain
 @st.cache(allow_output_mutation=True)

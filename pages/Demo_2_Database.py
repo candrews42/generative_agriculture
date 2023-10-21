@@ -22,7 +22,7 @@ warnings.filterwarnings('ignore')
 # Configuration and Markdown
 st.set_page_config(page_title="Database Viewer", page_icon="📊")
 st.header("Database Demo for Generative Agriculture")
-st.write("This demo shows database access to the SQL database and allows natural language queries.")
+st.write("This demo shows database access to the SQL database and allows natural language queries.\nSelect a database in the sidebar (try harvest tracker), and ask a question like 'how many chicken eggs did we harvest each month?'")
 
 # Setup database and agent chain
 @st.cache(allow_output_mutation=True)
