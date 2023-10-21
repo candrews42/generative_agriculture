@@ -49,7 +49,7 @@ class GenerativeAgriculture:
             exit()
         
         # Initialize memory setup (commented out for future use)
-        chatbot_memory = ConversationBufferWindowMemory(k=5)
+        chatbot_memory = None
         # sqlagent_memory = ConversationBufferMemory()
 
         chatbot_instructions = """

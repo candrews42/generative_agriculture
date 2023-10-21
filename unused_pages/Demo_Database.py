@@ -1,63 +1,66 @@
 import streamlit as st
 import pandas as pd
 import sqlalchemy
+import matplotlib.pyplot as plt
+from your_bot_module import setup_chain, utils  # Import your bot setup and utility functions
 
 # Configuration and Markdown
 st.set_page_config(page_title="Database Viewer", page_icon="📊")
-st.markdown("# Database view")
-st.sidebar.header("Database")
-st.write("This demo shows database access to the SQL database")
+st.header("Database Demo for Generative Agriculture")
+st.write("This demo shows database access to the SQL database and allows natural language queries.")
 
-# Database Connection
-mode = "remote"
-if mode == "remote":
-    username = st.secrets["username"]  # DB username
-    password = st.secrets["password"]  # DB password
-    host = st.secrets["host"]  # Public IP address for your instance
-    port = st.secrets["port"]
-    database = st.secrets["database"]  # Name of database ('postgres' by default)
+# Database Connection and Bot Setup
+username = st.secrets["username"]
+password = st.secrets["password"]
+host = st.secrets["host"]
+port = st.secrets["port"]
+database = st.secrets["database"]
 
 db_url = f'postgresql+psycopg2://{username}:{password}@{host}:{port}/{database}'
-
-# Initialize Connection
-try:
-    engine = sqlalchemy.create_engine(db_url)
-    conn = engine.connect()
-except Exception as e:
-    st.write(f"An error occurred: {e}")
-    exit()
+chatbot_agent, sql_agent = setup_chain(db_url)  # Setup bot and SQL toolkit
 
 # Dropdown for Table Selection
-table_option = st.selectbox('Choose a table', ['Select table', 'Raw Observations', 'Compost Piles', 'Compost Pile Ingredients', 'Compost Observations', 'Task List', 'Team Members', 'Plant Tracker', 'Harvest Tracker'])
+table_option = st.sidebar.selectbox('Choose a database', ['Select database', 'Harvest Tracker', 'Plant Tracker'])
 query_map = {
-    'Raw Observations': 'SELECT * FROM raw_observations;',
-    'Compost Piles': 'SELECT * FROM compost_piles;',
-    'Compost Pile Ingredients': 'SELECT * FROM compost_pile_ingredients;',
-    'Compost Observations': 'SELECT * FROM compost_observations;',
-    'Task List': 'SELECT * FROM task_list;',
-    'Team Members': 'SELECT * FROM team_members;',
+    'Harvest Tracker': 'SELECT * FROM harvest_tracker;',
     'Plant Tracker': 'SELECT * FROM plant_tracker;',
-    'Harvest Tracker': 'SELECT * FROM harvest_tracker;'
 }
 
 # Execute Query and Display Table
-if table_option != 'Select table':
+df = None
+if table_option != 'Select database':
     query = query_map[table_option]
     try:
+        engine = sqlalchemy.create_engine(db_url)
         df = pd.read_sql(query, engine)
-        st.table(df)
+        st.write(df)
     except Exception as e:
         st.write(f"An error occurred: {e}")
 
-# SQL Query Input
-sql_query = st.text_area("Enter your SQL query here:", height=200)
-if st.button('Execute SQL Query'):
-    try:
-        if sql_query.lower().startswith('select'):
-            df_custom = pd.read_sql(sql_query, engine)
-            st.table(df_custom)
-        else:
-            conn.execute(sql_query)
-            st.write("Query executed successfully.")
-    except Exception as e:
-        st.write(f"An error occurred: {e}")
+# Add chatbox for user queries
+user_query = st.text_input("Ask a question about the data:")
+
+# Bot Interaction
+if user_query and df is not None:
+    utils.display_msg(user_query, 'user')
+    with st.chat_message("assistant"):
+        st_cb = StreamHandler(st.empty())
+        chatbot_response = chatbot_agent.run(
+            {
+                'user_input': user_query,
+                'table_data': df.to_dict()  # Convert DataFrame to dictionary
+            },
+            callbacks=[st_cb]
+        )
+        
+        # Parse the bot's response to perform the corresponding data analysis
+        # TODO: Implement this part based on the bot's response
+        # For example, if bot says "Create a bar chart showing the number of dates harvested each week":
+        if "bar chart" in chatbot_response and "dates harvested each week" in chatbot_response:
+            df['week'] = pd.to_datetime(df['date']).dt.to_period('W')
+            weekly_harvest = df.groupby('week')['dates'].sum()
+            plt.bar(weekly_harvest.index.astype(str), weekly_harvest.values)
+            plt.xlabel('Week')
+            plt.ylabel('Dates Harvested')
+            plt.title('Dates Harvested Each Week')
+            st.pyplot()

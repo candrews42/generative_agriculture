@@ -90,7 +90,7 @@ class GenerativeAgriculture:
 
     # Setup database and agent chain
     @st.cache_resource
-    def setup_chain(_self):
+    def setup_chain(_self, chatbot_instructions):
         # Database Connection
         username, password, host, port, database = [st.secrets[key] for key in ["username", "password", "host", "port", "database"]]
         db_url = f'postgresql+psycopg2://{username}:{password}@{host}:{port}/{database}'
@@ -108,6 +108,31 @@ class GenerativeAgriculture:
         chatbot_memory = ConversationBufferWindowMemory(k=5)
         # sqlagent_memory = ConversationBufferMemory()
 
+        # Setup Chatbot
+        chatbot_prompt_template = PromptTemplate(
+            input_variables = ['task_list', 'user_input'],
+            template=chatbot_instructions
+        )
+        llm=OpenAI(model_name=_self.openai_model, temperature=0.0, streaming=True)
+        chatbot_agent = LLMChain(
+            llm=llm, 
+            memory=chatbot_memory, 
+            prompt=chatbot_prompt_template, 
+            verbose=True)
+        
+        # # Setup SQL toolkit and agent
+        # toolkit = SQLDatabaseToolkit(db=db, llm=OpenAI(temperature=0))
+        # sql_agent = create_sql_agent(
+        #     llm=OpenAI(temperature=0.1, streaming=True),
+        #     toolkit=toolkit,
+        #     verbose=True,
+        #     agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION
+        # )
+        # return chatbot_agent, sql_agent
+    
+    # Main function to handle user input and chatbot response
+    @utils.enable_chat_history
+    def main(self):
         chatbot_instructions = """
             You are a helpful farm management assistant, tasked with managing a list of tasks. Here is the task list you have:
 
@@ -128,33 +153,7 @@ class GenerativeAgriculture:
             "{user_input}"
 
             Please respond to the user's query accordingly, and maintain the task list in the same format and categories as you received it."""
-
-        # Setup Chatbot
-        chatbot_prompt_template = PromptTemplate(
-            input_variables = ['task_list', 'user_input'],
-            template=chatbot_instructions
-        )
-        llm=OpenAI(model_name=_self.openai_model, temperature=0.0, streaming=True)
-        chatbot_agent = LLMChain(
-            llm=llm, 
-            memory=chatbot_memory, 
-            prompt=chatbot_prompt_template, 
-            verbose=True)
-        
-        # Setup SQL toolkit and agent
-        toolkit = SQLDatabaseToolkit(db=db, llm=OpenAI(temperature=0))
-        sql_agent = create_sql_agent(
-            llm=OpenAI(temperature=0.1, streaming=True),
-            toolkit=toolkit,
-            verbose=True,
-            agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION
-        )
-        return chatbot_agent, sql_agent
-    
-    # Main function to handle user input and chatbot response
-    @utils.enable_chat_history
-    def main(self):
-        chatbot_agent, sql_agent = self.setup_chain()
+        chatbot_agent, sql_agent = self.setup_chain(chatbot_instructions)
         user_query = st.chat_input(placeholder="Enter your query to filter tasks")
         
         # Assume task_markdown_content contains the markdown-formatted task list
