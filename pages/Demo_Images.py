@@ -52,26 +52,7 @@ class GenerativeAgriculture:
         chatbot_memory = None
         # sqlagent_memory = ConversationBufferMemory()
 
-        chatbot_instructions = """
-            You are a helpful farm management assistant, tasked with managing a list of tasks. Here is the task list you have:
-
-            {task_list}
-
-            Your responsibilities include:
-            - Filtering tasks based on user queries.
-            - Editing existing tasks.
-            - Adding new tasks.
-            - Removing tasks.
-
-            Task Properties:
-            - Assignees: (Vinu, Teaching Team, Colin, Reem, Jannat, Tala, Mominah, Zaky). 'Unassigned' if no assignee.
-            - Priority: (Low, Medium, High)
-            - Date Due: "today", "this week", or a specific date as yyyy-mmm-dd
-
-            User Query:
-            "{user_input}"
-
-            Please respond to the user's query accordingly, and maintain the task list in the same format and categories as you received it."""
+        chatbot_instructions = ""
 
         # Setup Chatbot
         chatbot_prompt_template = PromptTemplate(
@@ -88,7 +69,7 @@ class GenerativeAgriculture:
         return chatbot_agent
     
     # Main function to handle user input and chatbot response
-    @utils.enable_chat_history
+    # @utils.enable_chat_history
     def main(self):
 
         # DALL-E Image Transformation
