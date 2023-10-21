@@ -46,3 +46,5 @@ st.markdown("""
 
 - **Open Source:** The farm management system will be **open source**, allowing for transparency, collaboration, and adaptability, and letting the system be generalized to be applied to similar problems. All data and IP will remain protected.
 """)
+
+st.subheader("[Stay Tuned! More to Come.]")
