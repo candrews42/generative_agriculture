@@ -1,42 +1,42 @@
 import streamlit as st
+
+# Set up the layout and title
 st.set_page_config(page_title="About", page_icon="🌱", layout="wide")
-st.header("Colin Andrews")
-st.write("email: colin@generativeagriculture.com, IG: perma.colin")
+
+# Create columns for layout
+col1, col2 = st.columns([1, 3])
+
+# Column 1: Display the profile image
+profile_image_url = "https://media.licdn.com/dms/image/D4D03AQEGjcJmBU8JGw/profile-displayphoto-shrink_800_800/0/1695462094237?e=1703116800&v=beta&t=hOlAfX3j-JZZzl4sIfEgsq6R_vaaPME5TjfiS3wPYmw"
+col1.image(profile_image_url, caption="Colin Andrews", width=300)
 
 # Introduction
-st.header("Introduction")
 st.write("""
-My name is Colin Andrews. I currently work at Learn to Grow, an outdoor educational center and regenerative farm.
-With a background in strategy consulting, systems engineering, and AI integration, I now focus on applying modern 
-systems thinking to natural processes. My work aims to use emerging AI tools and modern systems design methods to address several UN sustainable development goals and contribute 
-to the ecology of Bahrain and the Gulf region.
+**Colin Andrews**  is the farm manager at Learn to Grow Outdoor Educational Center and Regenerative Farm, applying modern systems thinking to natural processes to build methods that directly address several UN sustainable development goals and are immediately useful to regenerating the ecology of Bahrain and the Gulf region.
+
+Colin has had a diverse career in **strategy consulting and analytics for global end-to-end supply chain, systems engineering for blockchain-based local energy communities**, and the **integration of artificial intelligence algorithms into energy market trading**.
 """)
 
 # Professional Background
-st.header("Professional Background")
+st.header("Education")
 st.write("""
+**Georgia Institute of Technology**
 - **Master's in Computer Science**: Focused on machine learning and artificial intelligence.
 - **Bachelor's in Electrical Engineering**
-- **Strategy Consulting**: End-to-end supply chain analytics and optimization.
-- **Blockchain & Energy Markets**: Designed a multi-attribute double-sided auction for local energy communities.
+- **Minor Engineering & Business Management** through Denning Technology & Management Program \n
+**Oregon State University**: Permaculture Design Consultant Professional Certification
 """)
 
 # Experience
-st.header("Experience")
+st.header("Work Experience")
 st.write("""
-**Learn to Grow, Bahrain**
-- Farm and Business Manager
-- Permaculture Design Consultant
-- [Learn to Grow Instagram](https://instagram.com/learntogrow.bh?igshid=MzRlODBiNWFlZA==)
+**[Learn to Grow](https://instagram.com/learntogrow.bh?igshid=MzRlODBiNWFlZA==)** :: Regenerative Farm Manager and Permaculture Design Consultant :: **Bahrain 2023**
 
-**Grid Singularity, Lisbon & Berlin**
-- Research Scientist in energy market design and decentralization
+**[Grid Singularity](gridsingularity.com)** :: Research Scientist in energy market design and decentralization. Designed and implemented a multi-attribute double-sided auction for local energy communities. :: **Berlin & Lisbon 2019-2022**
 
-**Freeel.io, Vienna**
-- Incentive Design for Clean Energy Ecosystems
+**[Freeel.io](https://freeel.io/)** :: Incentive Design and token engineering for Clean Energy Ecosystems. ::**Vienna 2019**
 
-**Kurt Salmon, part of Accenture Strategy, New York & Atlanta, USA**
-- Business and Analytics Strategy Consultant
+**[Kurt Salmon, part of Accenture Strategy](https://www.accenture.com/us-en/about/strategy-index)** :: Business and Analytics Strategy Consultant for end-to-end supply chain analytics and optimization. :: **New York & Atlanta, USA 2015-2018**
 """)
 
 # Articles & Contributions
@@ -49,8 +49,7 @@ st.write("""
 # Skills & Technologies
 st.header("Skills & Technologies")
 st.write("""
-- **Programming**: Python, API Integration (ChatGPT, Langchain, MongoDB, etc.)
-- **AI/ML Libraries**: Tensorflow, Sci-kit learn
+- **Programming**: Python, API Integration (ChatGPT, Langchain, MongoDB, etc.), Streamlit, AI and ML Libraries (Tensorflow, Sci-kit learn), basic AWS and Google Cloud integration, SQL and PostgreSQL
 - **Product-Building Skills**: Prototyping, Requirements Engineering, Systems Design, Presentation, Team Leadership, Analytical Thinking  
 - **Agri Skills**: Basic carpentry, basic electronics, composting and soil building, farm management, and permaculture techniques
 - **Languages**: English (native), German (proficient), Portuguese & Spanish (functional), Arabic (beginner)
@@ -59,13 +58,9 @@ st.write("""
 # Contact & Social Media
 st.header("Contact & Social Media")
 st.write("""
-- 📧 Email: [andrews.colinj@gmail.com](mailto:andrews.colinj@gmail.com)
+- 📧 Email: [colin@generativeagriculture.com](mailto:colin@generativeagriculture.com)
 - 🌐 [LinkedIn](https://linkedin.com/in/andrews.co)
-- 🐱 [GitHub](#)  # Add your GitHub URL here
+- 🐱 [GitHub](https://github.com/candrews42) 
 - 📸 [Instagram: Learn to Grow](https://instagram.com/learntogrow.bh?igshid=MzRlODBiNWFlZA==)
 """)
-
-# Resume
-st.header("Resume")
-st.write("You can download my resume [here](#).")  # Add a link to your resume here
 
