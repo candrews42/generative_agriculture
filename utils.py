@@ -35,6 +35,8 @@ def display_msg(msg, author):
         msg (str): message to display
         author (str): author of the message -user/assistant
     """
+    if 'messages' not in st.session_state:
+        st.session_state.messages = []
     st.session_state.messages.append({"role": author, "content": msg})
     st.chat_message(author).write(msg)
 
