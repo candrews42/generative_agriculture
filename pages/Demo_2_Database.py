@@ -30,8 +30,8 @@ st.write("This demo shows database access to the SQL database and allows natural
 def setup_chain(chatbot_instructions):
     utils.configure_openai_api_key()
     #openai_model = "gpt-3.5-turbo-instruct"
-    #openai_model = "gpt-3.5-turbo"
-    openai_model = "gpt-4-0613"
+    openai_model = "gpt-3.5-turbo"
+    # openai_model = "gpt-4-0613"
     #openai_model = "gpt-4-32k" # 4x context length of gpt-4
     
     # Initialize memory setup (commented out for future use)

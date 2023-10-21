@@ -128,7 +128,7 @@ class GenerativeAgriculture:
         #     verbose=True,
         #     agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION
         # )
-        # return chatbot_agent, sql_agent
+        return chatbot_agent
     
     # Main function to handle user input and chatbot response
     @utils.enable_chat_history
@@ -153,7 +153,7 @@ class GenerativeAgriculture:
             "{user_input}"
 
             Please respond to the user's query accordingly, and maintain the task list in the same format and categories as you received it."""
-        chatbot_agent, sql_agent = self.setup_chain(chatbot_instructions)
+        chatbot_agent = self.setup_chain(chatbot_instructions)
         user_query = st.chat_input(placeholder="Enter your query to filter tasks")
         
         # Assume task_markdown_content contains the markdown-formatted task list
