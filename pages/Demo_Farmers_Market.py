@@ -74,7 +74,7 @@ if user_query and action != "Select action":
         
         
         # Dropdown for user to select an option to execute the trade
-        options = ["Select an option", "Carrot", "Potato"]  # Replace with actual items from mock_results
+        options = ["Select an option", "Option 1", "Option 2", "Option 3"]  # Replace with actual items from mock_results
         selected_option = st.sidebar.selectbox("Select an item to execute the trade:", options)
         
         if selected_option != "Select an option":
