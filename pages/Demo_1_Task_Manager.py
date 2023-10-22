@@ -146,10 +146,11 @@ class GenerativeAgriculture:
             - Priority: (Low, Medium, High)
             - Date Due: "today", "this week", or a specific date as yyyy-mmm-dd
 
-            Formatting Guidelines:
-            - MAINTAIN THE EXACT FORMAT AND CATEGORIES for consistency, provide it in Markdown.
+            Guidelines:
+            - USE THE EXACT FORMAT from the Formatting Example AND CATEGORIES from the task list for consistency, provide it in Markdown.
             - Keep the task list SORTED BY PRIORITY within each category.
             - Respond with ONLY THE FORMATTED TASK LIST
+            - Only provide Properties if they are unique between tasks, i.e. leave out the name if I ask for a specific name's assigned tasks.
 
             Formatting Example:
             🌱 Planting and Harvesting
