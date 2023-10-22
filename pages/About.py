@@ -12,17 +12,17 @@ col1.image(profile_image_url, caption="Colin Andrews", width=300)
 
 # Introduction
 st.write("""
-**Colin Andrews**  is the farm manager at Learn to Grow Outdoor Educational Center and Regenerative Farm, applying modern systems thinking to natural processes to build methods that directly address several UN sustainable development goals and are immediately useful to regenerating the ecology of Bahrain and the Gulf region.
+**Colin Andrews**  is the farm manager at Learn to Grow Outdoor Educational Center and Regenerative Farm, applying modern systems engineering to natural processes to build methods that directly address several UN sustainable development goals and are immediately useful to regenerating the ecology of Bahrain and the Gulf region.
 
-Colin has had a diverse career in **strategy consulting and analytics for global end-to-end supply chain, systems engineering for blockchain-based local energy communities**, and the **integration of artificial intelligence algorithms into energy market trading**.
+Colin has had a diverse career in **strategy consulting and analytics for global end-to-end supply chain, systems engineering for blockchain-based local energy communities**, and the **integration of artificial intelligence algorithms into energy market trading**. He is just as comfortable coding on an overnight train in India, getting his hands dirty on a farm in Bahrain, and presenting in a New York City board room.
 """)
 
 # Professional Background
 st.header("Education")
 st.write("""
 **Georgia Institute of Technology**
-- **Master's in Computer Science**: Focused on machine learning and artificial intelligence.
-- **Bachelor's in Electrical Engineering**
+- **Master's in Computer Science**: machine learning and artificial intelligence.
+- **Bachelor's in Electrical Engineering**: signals and systems
 - **Minor Engineering & Business Management** through Denning Technology & Management Program \n
 **Oregon State University**: Permaculture Design Consultant Professional Certification
 """)
@@ -32,7 +32,7 @@ st.header("Work Experience")
 st.write("""
 **[Learn to Grow](https://instagram.com/learntogrow.bh?igshid=MzRlODBiNWFlZA==)** :: Regenerative Farm Manager and Permaculture Design Consultant :: **Bahrain 2023**
 
-**[Grid Singularity](gridsingularity.com)** :: Research Scientist in energy market design and decentralization. Designed and implemented a multi-attribute double-sided auction for local energy communities. :: **Berlin & Lisbon 2019-2022**
+**[Grid Singularity](https://gridsingularity.com)** :: Research Scientist in energy market design and decentralization. Designed and implemented a multi-attribute double-sided auction for local energy communities. :: **Berlin & Lisbon 2019-2022**
 
 **[Freeel.io](https://freeel.io/)** :: Incentive Design and token engineering for Clean Energy Ecosystems. ::**Vienna 2019**
 
@@ -47,16 +47,17 @@ st.write("""
 """)
 
 # Skills & Technologies
-st.header("Skills & Technologies")
+st.header("Skills")
 st.write("""
 - **Programming**: Python, API Integration (ChatGPT, Langchain, MongoDB, etc.), Streamlit, AI and ML Libraries (Tensorflow, Sci-kit learn), basic AWS and Google Cloud integration, SQL and PostgreSQL
-- **Product-Building Skills**: Prototyping, Requirements Engineering, Systems Design, Presentation, Team Leadership, Analytical Thinking  
-- **Agri Skills**: Basic carpentry, basic electronics, composting and soil building, farm management, and permaculture techniques
+- **Product-Building Skills**: Systems Design, Prototyping, Requirements Engineering, Systems Design, Presentation
+- **Business Skills**: Team Leadership and Management, Data Analysis, Presentation
+- **Agri Skills**: Basic carpentry, basic electronics, composting and soil building, farm and taks management, and permaculture techniques
 - **Languages**: English (native), German (proficient), Portuguese & Spanish (functional), Arabic (beginner)
 """)
 
 # Contact & Social Media
-st.header("Contact & Social Media")
+st.header("Contact")
 st.write("""
 - 📧 Email: [colin@generativeagriculture.com](mailto:colin@generativeagriculture.com)
 - 🌐 [LinkedIn](https://linkedin.com/in/andrews.co)
