@@ -27,18 +27,17 @@ st.write("This demo shows database access to the SQL database and allows natural
 # Dropdown for Table Selection (Moved from Sidebar)
 table_option = st.selectbox('Choose a database', ['Select database', 'Harvest Tracker', 'Plant Tracker'])  # Moved from sidebar
 query_map = {
-    'Harvest Tracker': 'SELECT * FROM harvest_tracker;',
+    'Harvest Tracker': 'SELECT * FROM harvest_tracker ORDER BY harvest_date DESC;',
     'Plant Tracker': 'SELECT * FROM plant_tracker;',
 }
-
 
 # Setup database and agent chain
 @st.cache(allow_output_mutation=True)
 def setup_chain(chatbot_instructions):
     utils.configure_openai_api_key()
     #openai_model = "gpt-3.5-turbo-instruct"
-    openai_model = "gpt-3.5-turbo"
-    # openai_model = "gpt-4-0613"
+    #openai_model = "gpt-3.5-turbo"
+    openai_model = "gpt-4-0613"
     #openai_model = "gpt-4-32k" # 4x context length of gpt-4
     
     # Initialize memory setup (commented out for future use)
@@ -86,12 +85,24 @@ Please respond with **ONLY THE PYTHON CODE** that can be directly executed to an
 
 chatbot_agent = setup_chain(chatbot_instructions)  # Setup bot
 
+df = None
+# Execute Query and Display Table
+if table_option != 'Select database':
+    query = f"SELECT * FROM {table_option.lower().replace(' ', '_')} ORDER BY harvest_date DESC;"
+    try:
+        df = pd.read_sql(query, engine)
+        st.write(df)  # Show only the first 10 rows
+    except Exception as e:
+        st.write(f"An error occurred: {e}")
+
+
 # Add chatbox for user queries
 user_query = st.text_input("Ask a question about the data:")
 
 # Bot Interaction
 if user_query:
     utils.display_msg(user_query, 'user')
+    
     with st.chat_message("assistant"):
         st_cb = StreamHandler(st.empty())
         
@@ -117,13 +128,3 @@ if user_query:
             st.code(result, language='python')
         except Exception as e:
             st.write(f"An error occurred while running the code: {e}")
-
-# Execute Query and Display Table
-df = None  # Initialize df to None
-if table_option != 'Select database':
-    query = query_map[table_option]
-    try:
-        df = pd.read_sql(query, engine)
-        st.write(df.head(10))  # Show only the first 10 rows
-    except Exception as e:
-        st.write(f"An error occurred: {e}")

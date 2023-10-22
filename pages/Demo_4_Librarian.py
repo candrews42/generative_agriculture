@@ -29,8 +29,8 @@ st.write("Explore the raw observations by asking a question. Try, 'have we seen 
 def setup_chain(chatbot_instructions):
     utils.configure_openai_api_key()
     #openai_model = "gpt-3.5-turbo-instruct"
-    openai_model = "gpt-3.5-turbo"
-    # openai_model = "gpt-4-0613"
+    #openai_model = "gpt-3.5-turbo"
+    openai_model = "gpt-4-0613"
     #openai_model = "gpt-4-32k" # 4x context length of gpt-4
     
     # Initialize memory setup (commented out for future use)
@@ -62,7 +62,7 @@ except Exception as e:
     exit()
 
 # Agent Setup
-chatbot_instructions = """You are a data assistant. Your main task is to analyze the last 10 entries from the 'raw_observations' table and provide insights based on the user's query.
+chatbot_instructions = """You are a data assistant. Your main task is to provide specific insights based on the user's query using the last 10 entries from the 'raw_observations' table.
 
 User Query: {user_input}
 
@@ -70,25 +70,38 @@ Sample Data:
 {table_data}
 
 Note: 
-- Provide insights or summaries based on the data in 'df'.
-- If the user's query suggests it, feel free to mention any patterns, anomalies, or notable points.
+- Directly answer the user's query based on the data in 'df'.
+- If the user's query suggests it, mention any relevant activities, patterns, or anomalies.
+- Be concise and to the point. Avoid unnecessary details.
 
-Please respond with **ONLY INSIGHTS** based on the last 10 entries in the 'raw_observations' table. """
-
-
+Please respond with **ONLY INSIGHTS** that directly address the user's query based on the last 10 entries in the 'raw_observations' table.
+"""
 
 chatbot_agent = setup_chain(chatbot_instructions)  # Setup bot
 
-# Load the most recent 7 entries from raw_observations
+# Load the most recent 7 entries from raw_observations and sort by 'id' in descending order
 try:
-    query = "SELECT * FROM raw_observations ORDER BY time_observed DESC LIMIT 7;"
+    query = "SELECT * FROM raw_observations ORDER BY id DESC LIMIT 7;"
     df = pd.read_sql(query, engine)
 except Exception as e:
     st.write(f"An error occurred: {e}")
 
-# Add chatbox for user queries
+
+# Display the most recent entries before the user query
 if df is not None:
-    user_query = st.text_input("Ask a question about the database of raw observations:")
+
+    st.write("### Most Recent Entries in raw_observations")
+
+    # Loop through each observation and display it as a markdown
+    for i, row in df.iterrows():
+        st.markdown(
+            f"<b>ID: {row['id']} | {row['user_name']} | {row['location']} | {row['time_observed']} | {'📷' if row['image'] else '🚫'}</b><br>{row['notes']}<hr>",
+            unsafe_allow_html=True
+        )
+    
+    # Add chatbox for user queries
+    user_query = st.text_input("Ask a question about the database of raw observations entries:")
+
 
     # Bot Interaction
     if user_query:
@@ -97,7 +110,8 @@ if df is not None:
             st_cb = StreamHandler(st.empty())
             
             # Pass only the last 10 rows of the data to the chatbot to reduce token count
-            sample_df = df.tail(10).to_dict()  # Assuming df is sorted by most recent
+            # Exclude the 'image' field
+            sample_df = df.drop(columns=['image']).tail(10).to_dict()  
             
             chatbot_response = chatbot_agent.run(
                 {
@@ -108,9 +122,4 @@ if df is not None:
             )
 
             # Display the chatbot's insight
-            st.code(chatbot_response, language='python')
-    
-    st.write("### Most Recent Entries in raw_observations")
-    # Replace Base64 image strings with the word "Image"
-    df['image'] = df['image'].apply(lambda x: "Image" if x else "No Image")
-    st.table(df)
+            st.write(chatbot_response)
