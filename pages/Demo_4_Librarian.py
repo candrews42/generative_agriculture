@@ -83,33 +83,34 @@ chatbot_agent = setup_chain(chatbot_instructions)  # Setup bot
 try:
     query = "SELECT * FROM raw_observations ORDER BY time_observed DESC LIMIT 7;"
     df = pd.read_sql(query, engine)
-    st.write("### Most Recent Entries in raw_observations")
-    
-    # Replace Base64 image strings with the word "Image"
-    df['image'] = df['image'].apply(lambda x: "Image" if x else "No Image")
-    st.table(df)
 except Exception as e:
     st.write(f"An error occurred: {e}")
 
 # Add chatbox for user queries
-user_query = st.text_input("Ask a question about the last 10 entries:")
+if df is not None:
+    user_query = st.text_input("Ask a question about the database of raw observations:")
 
-# Bot Interaction
-if user_query:
-    utils.display_msg(user_query, 'user')
-    with st.chat_message("assistant"):
-        st_cb = StreamHandler(st.empty())
-        
-        # Pass only the last 10 rows of the data to the chatbot to reduce token count
-        sample_df = df.tail(10).to_dict()  # Assuming df is sorted by most recent
-        
-        chatbot_response = chatbot_agent.run(
-            {
-                'user_input': user_query,
-                'table_data': sample_df  # Pass sample data
-            },
-            callbacks=[st_cb]
-        )
+    # Bot Interaction
+    if user_query:
+        utils.display_msg(user_query, 'user')
+        with st.chat_message("assistant"):
+            st_cb = StreamHandler(st.empty())
+            
+            # Pass only the last 10 rows of the data to the chatbot to reduce token count
+            sample_df = df.tail(10).to_dict()  # Assuming df is sorted by most recent
+            
+            chatbot_response = chatbot_agent.run(
+                {
+                    'user_input': user_query,
+                    'table_data': sample_df  # Pass sample data
+                },
+                callbacks=[st_cb]
+            )
 
-        # Display the chatbot's insight
-        st.code(chatbot_response, language='python')
+            # Display the chatbot's insight
+            st.code(chatbot_response, language='python')
+    
+    st.write("### Most Recent Entries in raw_observations")
+    # Replace Base64 image strings with the word "Image"
+    df['image'] = df['image'].apply(lambda x: "Image" if x else "No Image")
+    st.table(df)

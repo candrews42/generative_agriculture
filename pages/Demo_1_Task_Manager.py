@@ -173,12 +173,12 @@ class GenerativeAgriculture:
                 st_cb = StreamHandler(st.empty())
                 chatbot_response = chatbot_agent.run(
                     {
-                        'user_input': user_query,
-                        'task_list': task_markdown_content
+                        'task_list': task_markdown_content,
+                        'user_input': user_query
                     },
                     callbacks=[st_cb]
                 )
-                
+
 # Entry point of the application
 if __name__ == "__main__":
     obj = GenerativeAgriculture()

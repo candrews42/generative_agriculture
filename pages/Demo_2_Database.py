@@ -24,6 +24,14 @@ st.set_page_config(page_title="Database Viewer", page_icon="📊")
 st.header("Database Demo for Generative Agriculture")
 st.write("This demo shows database access to the SQL database and allows natural language queries.\nSelect a database in the sidebar (try harvest tracker), and ask a question like 'how many chicken eggs did we harvest each month?'")
 
+# Dropdown for Table Selection (Moved from Sidebar)
+table_option = st.selectbox('Choose a database', ['Select database', 'Harvest Tracker', 'Plant Tracker'])  # Moved from sidebar
+query_map = {
+    'Harvest Tracker': 'SELECT * FROM harvest_tracker;',
+    'Plant Tracker': 'SELECT * FROM plant_tracker;',
+}
+
+
 # Setup database and agent chain
 @st.cache(allow_output_mutation=True)
 def setup_chain(chatbot_instructions):
@@ -72,32 +80,11 @@ Sample Data:
 Note: 
 - Do **NOT** create the DataFrame in your response. Assume 'df' already exists.
 - Do **NOT** include any comments, imports, or explanations in your output. 
-- If the query suggests it, please generate Python code for creating a relevant graph using Matplotlib and streamlit, e.g.:
-    plt.plot(df['some_column'])
-    st.pyplot()
+- Please make the result of your code plain text, for example the request for a how many eggs each month should be: Jan: 30 eggs, Feb: 15 eggs, etc.
 
-Please respond with **ONLY THE PYTHON CODE** that can be directly executed to analyze 'df'. """
-
-
+Please respond with **ONLY THE PYTHON CODE** that can be directly executed to analyze 'df'."""
 
 chatbot_agent = setup_chain(chatbot_instructions)  # Setup bot
-
-# Dropdown for Table Selection
-table_option = st.sidebar.selectbox('Choose a database', ['Select database', 'Harvest Tracker', 'Plant Tracker'])
-query_map = {
-    'Harvest Tracker': 'SELECT * FROM harvest_tracker;',
-    'Plant Tracker': 'SELECT * FROM plant_tracker;',
-}
-
-# Execute Query and Display Table
-df = None  # Initialize df to None
-if table_option != 'Select database':
-    query = query_map[table_option]
-    try:
-        df = pd.read_sql(query, engine)
-        st.write(df)
-    except Exception as e:
-        st.write(f"An error occurred: {e}")
 
 # Add chatbox for user queries
 user_query = st.text_input("Ask a question about the data:")
@@ -109,7 +96,7 @@ if user_query:
         st_cb = StreamHandler(st.empty())
         
         # Pass only a sample of the data to the chatbot to reduce token count
-        sample_df = df.head(5).to_dict()
+        sample_df = df.head(5).to_dict() if df is not None else None
         
         chatbot_response = chatbot_agent.run(
             {
@@ -123,7 +110,6 @@ if user_query:
         st.code(chatbot_response, language='python')
         code_to_run = chatbot_response  # replace this with actual bot output
         
-        
         # Run the generated Python code on the full DataFrame
         try:
             result = eval(code_to_run)
@@ -131,3 +117,13 @@ if user_query:
             st.code(result, language='python')
         except Exception as e:
             st.write(f"An error occurred while running the code: {e}")
+
+# Execute Query and Display Table
+df = None  # Initialize df to None
+if table_option != 'Select database':
+    query = query_map[table_option]
+    try:
+        df = pd.read_sql(query, engine)
+        st.write(df.head(10))  # Show only the first 10 rows
+    except Exception as e:
+        st.write(f"An error occurred: {e}")

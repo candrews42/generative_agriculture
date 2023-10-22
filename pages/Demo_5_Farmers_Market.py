@@ -48,35 +48,33 @@ Turn this description into a JSON object with relevant attributes for the item. 
 
 chatbot_agent = setup_chain(chatbot_instructions)  # Setup bot
 
-# Dropdown for Buy/Sell
-action = st.sidebar.selectbox("What would you like to do?", ["Select action", "Buy", "Sell"])
+# Dropdown for Buy/Sell (Moved to main area)
+action = st.selectbox("What would you like to do?", ["Select action", "Buy", "Sell"])
 
-# Chatbox for user query
-user_query = st.text_input("Please describe what you're looking to buy or sell:")
+# Chatbox for user query only appears after action is selected
+if action != "Select action":
+    user_query = st.text_input("Please describe what you're looking to buy or sell:")
 
-# Bot Interaction
-if user_query and action != "Select action":
-    utils.display_msg(user_query, 'user')
-    with st.chat_message("assistant"):
-        st_cb = StreamHandler(st.empty())
-        
-        chatbot_response = chatbot_agent.run(
-            {
-                'user_input': user_query,
-                'action': action
-            },
-            callbacks=[st_cb]
-        )
-        
-        # Assume chatbot_response contains JSON object and mock results
-        # Parse and display them here (replace the following lines with actual logic)
-        st.code(chatbot_response, language='json')
-        
-        
-        # Dropdown for user to select an option to execute the trade
-        options = ["Select an option", "Option 1", "Option 2", "Option 3"]  # Replace with actual items from mock_results
-        selected_option = st.sidebar.selectbox("Select an item to execute the trade:", options)
-        
-        if selected_option != "Select an option":
-            st.success(f"You have successfully executed a trade for {selected_option}")
-
+    # Bot Interaction
+    if user_query:
+        utils.display_msg(user_query, 'user')
+        with st.chat_message("assistant"):
+            st_cb = StreamHandler(st.empty())
+            
+            chatbot_response = chatbot_agent.run(
+                {
+                    'user_input': user_query,
+                    'action': action
+                },
+                callbacks=[st_cb]
+            )
+            
+            # Assume chatbot_response contains JSON object and mock results
+            st.code(chatbot_response, language='json')
+            
+            # Dropdown for user to select an option to execute the trade
+            options = ["Select an option", "Option 1", "Option 2", "Option 3"]  # Replace with actual items from mock_results
+            selected_option = st.selectbox("Select an item to execute the trade:", options)
+            
+            if selected_option != "Select an option":
+                st.success(f"You have successfully executed a trade for {selected_option}")
