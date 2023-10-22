@@ -17,7 +17,7 @@ st.write("Explore and collect unique plants around you.\n Enter your observation
 
 # User Inputs     
 user_name = st.text_input("Your name:")    
-location = st.text_input("Location:", "Current Location")   
+location = st.text_input("Location:", "Learn to Grow Educational Center, Bahrain")   
 time_observed = st.date_input("Time (default to now):", min_value=datetime.today())
 notes = st.text_input("Any observations?")
 uploaded_image = st.file_uploader("Upload an image of the plant:", type=['jpg', 'jpeg', 'png'])

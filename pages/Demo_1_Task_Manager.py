@@ -142,9 +142,9 @@ class GenerativeAgriculture:
             - Filtering tasks based on user queries.
 
             Task Properties:
-            - Assignees: (e.g. Vinu, Teaching Team, Colin, Reem, other names). 'Unassigned' if no assignee.
-            - Priority: (Low, Medium, High)
-            - Date Due: "today", "this week", or a specific date as yyyy-mmm-dd
+            - Assignees: (e.g. Vinu, Teaching Team, Colin, Reem, other names). default Unassigned
+            - Priority: (Low, Medium, High) default Low
+            - Date Due: "today", "this week", or a specific date as yyyy-mmm-dd. default None
 
             Guidelines:
             - USE THE EXACT FORMAT from the Formatting Example AND CATEGORIES from the task list for consistency, provide it in Markdown.
