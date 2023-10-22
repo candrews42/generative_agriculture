@@ -11,8 +11,7 @@ def main():
 
     # About Us
     st.header('About Us')
-    st.write("""Please see our [About page](https://generativeagriculture.streamlit.app/About)
-                and our [Concept Paper draft](https://generativeagriculture.streamlit.app/Concept_Paper)
+    st.write("""Please see our [About page](https://generativeagriculture.streamlit.app/About), our [Concept Paper draft](https://generativeagriculture.streamlit.app/Concept_Paper), and our [GitHub](https://github.com/candrews42/generative_agriculture) 
     """)
 
     # Live Demos

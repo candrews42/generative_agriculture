@@ -60,8 +60,8 @@ st.write("""
 st.header("Contact")
 st.write("""
 - 📧 Email: [colin@generativeagriculture.com](mailto:colin@generativeagriculture.com)
-- 🌐 [LinkedIn](https://linkedin.com/in/andrews.co)
-- 🐱 [GitHub](https://github.com/candrews42) 
+- 🌐 [LinkedIn](https://www.linkedin.com/in/andrewsco/)
+- 🐱 [GitHub](https://github.com/candrews42/generative_agriculture) 
 - 📸 [Instagram: Learn to Grow](https://instagram.com/learntogrow.bh?igshid=MzRlODBiNWFlZA==)
 """)
 
