@@ -10,5 +10,6 @@ st.markdown("#### Turn the world into your botanical garden.")
 # Introduction
 st.markdown("### 🌿 Introduction")
 st.write("""
-Coming soon! Explore the world, identify and collect unique plant NFTs. Participate in real-world challenges, learn about local flora, and contribute to community-validated datasets.
+Explore the world, identify and collect unique plant NFTs. Participate in real-world challenges, learn about local flora, and contribute to community-validated datasets.
 """)
+st.markdown("#### [More details coming soon!]")
