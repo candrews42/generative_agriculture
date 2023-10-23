@@ -21,7 +21,7 @@ st.header("🛠 Core Components")
 ## World Map Interface
 st.subheader("1. World Map Interface")
 st.write("Explore the world map to find and identify plants.")
-st.image("https://ibb.co/jgFqwvg", caption="World Map Interface")
+st.image("https://i.ibb.co/TLbmFBP/map.png", caption="World Map Interface")
 
 ## My Collection [PlantDex]
 st.subheader("2. My Collection [PlantDex]")
