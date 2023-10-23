@@ -18,13 +18,15 @@ def main():
     - **[Gaia Garden](https://generativeagriculture.streamlit.app/2_Gaia_Garden_concept)**: Farmville for your real-life garden. Manage and enjoy it based on actual needs.
     - **[Farm-to-Table](https://generativeagriculture.streamlit.app/3_Blockchain_Farmers_Market_concept)**: A blockchain-based multi-attribute marketplace revolutionizing producer-consumer interactions.
 
-    Our immediate focus is practical tools for the Learn to Grow Educational Center, with plans for broader rollout.
+    Please see our [Concept Paper draft](https://generativeagriculture.streamlit.app/Concept_Paper) to see how everything fits together.
+
+    Our immediate focus is practical tools for the Learn to Grow Educational Center, with plans for broader rollout. The Task Manager and Harvest Tracker demos are **already being used**.
     """)
 
 
     # About Us
     st.header('About Us')
-    st.write("""Please see our [About page](https://generativeagriculture.streamlit.app/About), our [Concept Paper draft](https://generativeagriculture.streamlit.app/Concept_Paper), and our [GitHub](https://github.com/candrews42/generative_agriculture)
+    st.write("""Please see our [About page](https://generativeagriculture.streamlit.app/About) and our [GitHub](https://github.com/candrews42/generative_agriculture)
     """)
 
     # Live Demos
