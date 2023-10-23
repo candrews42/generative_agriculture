@@ -9,6 +9,19 @@ def main():
     st.write("""Revolutionizing farming and gardening by connecting **regenerative agriculture** and **generative AI**.
     """)
 
+        # Vision
+    st.header('Our Vision')
+    st.write("""
+    Three interconnected platforms:
+
+    - **[Gaia Go](https://generativeagriculture.streamlit.app/1_Gaia_Go_concept)**: Pokémon Go for ecology. Gamify ecological data collection and collect plants as unique NFTs.
+    - **[Gaia Garden](https://generativeagriculture.streamlit.app/2_Gaia_Garden_concept)**: Farmville for your real-life garden. Manage and enjoy it based on actual needs.
+    - **[Farm-to-Table](https://generativeagriculture.streamlit.app/3_Blockchain_Farmers_Market_concept)**: A blockchain-based multi-attribute marketplace revolutionizing producer-consumer interactions.
+
+    Our immediate focus is practical tools for the Learn to Grow Educational Center, with plans for broader rollout.
+    """)
+
+
     # About Us
     st.header('About Us')
     st.write("""Please see our [About page](https://generativeagriculture.streamlit.app/About), our [Concept Paper draft](https://generativeagriculture.streamlit.app/Concept_Paper), and our [GitHub](https://github.com/candrews42/generative_agriculture)
@@ -17,16 +30,22 @@ def main():
     # Live Demos
     st.header('Live Demos')
     st.write("""
-    Explore these exciting demos that showcase the power of AI in agriculture, all in active development:
+    Explore these applet demos that showcase the power of AI in agriculture, all in active development:
     """)
 
     st.markdown("""
-    - [Task Manager](https://generativeagriculture.streamlit.app/Demo_1_Task_Manager) :: Shows how farm task management can be assisted by AI.
-    - [Database](https://generativeagriculture.streamlit.app/Demo_2_Database) :: Demonstrates how databases can be queried with natural language, removing the need for training in SQL or data analysis.
-    - [Plant Detective](https://generativeagriculture.streamlit.app/Demo_3_Plant_Detective) :: A plant identifier that lets people identify and collect the plants around them like Pokemon Go.
-    - [Librarian](https://generativeagriculture.streamlit.app/Demo_4_Librarian) :: Trained on farm data, currently able to query recent observations from Plant Detective.
-    - [Farmers Market](https://generativeagriculture.streamlit.app/Demo_5_Farmers_Market) :: Shows how multi-attribute double-auctions can be adapted for an online farmer's market.
-    - [Image Assets](https://generativeagriculture.streamlit.app/Demo_6_Image_Assets) :: Pictures of physical farm assets can be automatically translated into digital assets for a Farmville-style interface, but for your actual farm or garden.
+    For Gaia Go:
+    - [Plant Detective](https://generativeagriculture.streamlit.app/1.1_Plant_Detective_demo) :: A plant identifier that lets people identify and collect the plants around them like Pokemon Go.
+    - [Librarian](https://generativeagriculture.streamlit.app/1.2_Librarian_demo) :: Trained on farm data, currently able to query recent observations from Plant Detective.
+    For Gaia Garden:
+    - [Task Manager](https://generativeagriculture.streamlit.app/2.1_Task_Manager_demo) :: Shows how farm task management can be assisted by AI.
+    - [Harvest Tracker](https://generativeagriculture.streamlit.app/2.2_Harvest_Tracker_demo) :: Report items harvested from the garden and add to a database
+    - [Database](https://generativeagriculture.streamlit.app/2.3_Database_demo) :: Demonstrates how databases can be queried with natural language, removing the need for training in SQL or data analysis.
+    For 
+    - [Image Assets](https://generativeagriculture.streamlit.app/2.4_Image_Assets_demo) :: Pictures of physical farm assets can be automatically translated into digital assets for a Farmville-style interface, but for your actual farm or garden.
+    Blockchain Farmer's Market
+    - [Farmers Market](https://generativeagriculture.streamlit.app/3.1_Farmers_Market_demo) :: Shows how multi-attribute double-auctions can be adapted for an online farmer's market.
+    
     """)
 
     # Meet the Founder
