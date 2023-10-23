@@ -103,18 +103,18 @@ Each phase of development will proceed through four stages:
 
 **Stage 1: Proof of Concept**
 
-- [ ] Initial development of the system with a centralized server
-- [ ] Implement the multi-attribute double auction mechanism for a transparent and fair marketplace
+- [x] Mock-up of bids and offers being matched
+- [ ] Multi-attribute bid and offer order book databases in .json
+- [ ] Bid and offer matching mechanism
 
 **Stage 2: Functional Use at Learn to Grow (our pilot project)**
 
-- [ ] Deploy a test version of the Farmer's Market platform at Learn to Grow
-- [ ] Collect data to refine the user interface and transaction process
+- [ ] Learn to Grow produce searchable in database
+- [ ] View and reserve produce at Learn to Grow on user interface
 
 **Stage 3: Generalization for Multiple Users**
-
-- [ ] User interface for buying and selling garden-related items
-- [ ] Implement user reviews and community verification features
+ 
+- [ ] Implement users, reviews, and community verification features
 
 **Stage 4: Scalability**
 
