@@ -41,10 +41,10 @@ st.write("""
 
 Each phase of development will proceed through four stages:
 
-1. Proof of Concept with atomic applets
-2. Functional Use at Learn to Grow (our pilot project)
-3. Generalization for Multiple Users
-4. Scalability
+1. **Proof of Concept** with atomic applets
+2. **Functional Use** at Learn to Grow (our pilot project)
+3. **Generalization** for Multiple Users
+4. **Scalability**
 
 ### Phase 2: Gaia Go Integration
 
@@ -178,7 +178,7 @@ st.write("""
 
 
 
-
+st.markdown("## [More to Come! Stay Tuned...]")
 
 
 # System Design
