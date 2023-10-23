@@ -15,7 +15,7 @@ def main():
     Three interconnected platforms:
 
     - **[Gaia Go](https://generativeagriculture.streamlit.app/1_Gaia_Go_concept)**: Pokémon Go for ecology. Gamify ecological data collection and collect plants as unique NFTs.
-    - **[Gaia Garden](https://generativeagriculture.streamlit.app/2_Gaia_Garden_concept)**: Farmville for your real-life garden. Manage and enjoy it based on actual needs.
+    - **[Garden of Gaia](https://generativeagriculture.streamlit.app/2_Garden_of_Gaia_concept)**: Farmville for your real-life garden. Manage and enjoy it based on actual needs.
     - **[Farm-to-Table](https://generativeagriculture.streamlit.app/3_Blockchain_Farmers_Market_concept)**: A blockchain-based multi-attribute marketplace revolutionizing producer-consumer interactions.
 
     Please see our [Concept Paper draft](https://generativeagriculture.streamlit.app/Concept_Paper) to see how everything fits together.

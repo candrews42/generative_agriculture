@@ -17,7 +17,7 @@ The system aims to **collect and organize unique regional datasets and insights*
 The ultimate vision of this project consists of three interconnected platforms:
 
 - **Gaia Go**: Think Pokémon Go but for ecology. This platform aims to gamify the collection of ecological data, allowing users to explore, identify, learn, and collect plant species on a world map as unique NFTs.
-- **Gaia Garden**: Farmville for your actual garden. Manage, plan, and enjoy your garden digitally, based on real-world conditions and needs.
+- **Garden of Gaia**: Farmville for your actual garden. Manage, plan, and enjoy your garden digitally, based on real-world conditions and needs.
 - **Farm-to-Table**: A blockchain-based, multi-attribute double auction marketplace for garden and farm-related items, revolutionizing the way producers and consumers interact.
 
 In the near term, our focus is on creating practical tools for managing the regenerative farm at the Learn to Grow Educational Center that can slowly be rolled out for use in home gardens and other farms.
@@ -65,7 +65,7 @@ Each phase of development will proceed through four stages:
 - [ ] Integrate GPS and other ease-of-use features
 - [ ] Implement quests and challenges to encourage user participation
 
-### Phase 3: Gaia Garden Prototype
+### Phase 3: Garden of Gaia Prototype
 
 **Stage 1: Proof of Concept**
 
@@ -87,7 +87,7 @@ Each phase of development will proceed through four stages:
 
 **Stage 1: Proof of Concept**
 
-- [ ] Integrate Gaia Go, Gaia Garden, and the Task Management Tool
+- [ ] Integrate Gaia Go, Garden of Gaia, and the Task Management Tool
 
 **Stage 2: Functional Use at Learn to Grow (our pilot project)**
 
