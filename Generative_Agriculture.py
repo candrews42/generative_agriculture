@@ -1,9 +1,6 @@
 import streamlit as st
 
 def main():
-
-    st.title('Generative Agriculture')
-
     # Introduction
     st.header('Farmville for your real-life garden.')
     st.write("""Revolutionizing farming and gardening by connecting **regenerative agriculture** and **generative AI**.
