@@ -39,7 +39,7 @@ st.header("⭐ Features")
 ## Plant Identification
 st.subheader("1. Plant Identification")
 st.write("Use AI to identify plants from your photos.")
-st.image("https://i.ibb.co/pdKwwS9/plumeria-ai-snapshot.png", caption="Plant Identification", width=300)
+st.image("https://i.ibb.co/pdKwwS9/plumeria-ai-snapshot.png", caption="Plant Identification", width=500)
 
 ## NFT Leveling Up
 st.subheader("2. NFT Leveling Up")

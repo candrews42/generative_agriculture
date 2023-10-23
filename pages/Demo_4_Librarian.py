@@ -21,8 +21,16 @@ warnings.filterwarnings('ignore')
 
 # Configuration and Markdown
 st.set_page_config(page_title="Librarian", page_icon="📚")
-st.header("Librarian for Generative Agriculture")
-st.write("Explore the raw observations by asking a question. Try, 'have we seen any bugs on our plants?'")
+st.subheader("Ask the Librarian 📚")
+st.write("""
+**Explore our raw observations database with natural language queries.**
+
+- **How to Use:**
+  - Simply ask a question in the text box below.
+  
+- **Example Question:**
+  - 'Have we seen any bugs on our plants?'
+""")
 
 # Setup database and agent chain
 @st.cache(allow_output_mutation=True)

@@ -12,8 +12,22 @@ engine = sqlalchemy.create_engine(db_url)
 
 # Configuration and Markdown
 st.set_page_config(page_title="Plant Detective", page_icon="🌱")
-st.header("Plant Detective")
-st.write("Explore and collect unique plants around you.\n Enter your observation. If you upload an image the plant will be identified. Your observation will be added to our raw observations database which trains our librarian.")
+st.subheader("Plant Detective 🌱")
+st.write("""
+**Discover and collect unique flora in your surroundings.**
+
+- **How to Use:**
+  - Enter your observation in the text box below.
+  - Optionally, upload an image for automatic plant identification.
+  
+- **What Happens Next:**
+  - Your observation contributes to our raw observations database.
+  - This database helps train our AI-powered plant librarian.
+
+- **Get Started:**
+  - Scroll down to enter your observation and upload your image.
+""")
+
 
 # User Inputs     
 user_name = st.text_input("Your name:")    

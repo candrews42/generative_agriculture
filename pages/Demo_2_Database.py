@@ -21,8 +21,17 @@ warnings.filterwarnings('ignore')
 
 # Configuration and Markdown
 st.set_page_config(page_title="Database Viewer", page_icon="📊")
-st.header("Database Demo for Generative Agriculture")
-st.write("This demo shows database access to the SQL database and allows natural language queries.\nSelect a database in the sidebar (try harvest tracker), and ask a question like 'how many chicken eggs did we harvest each month?'")
+st.header("Database Demo")
+st.subheader("Database Access Demo")
+st.write("""
+- **Experience natural language queries** with our SQL database.
+- **How to Use:**
+  - Select a database from the sidebar (e.g., Harvest Tracker).
+  - Ask a question related to the selected database.
+- **Example Query:**
+  - "How many chicken eggs did we harvest each month?"
+""")
+
 
 # Dropdown for Table Selection (Moved from Sidebar)
 table_option = st.selectbox('Choose a database', ['Select database', 'Harvest Tracker', 'Plant Tracker'])  # Moved from sidebar
@@ -102,7 +111,7 @@ user_query = st.text_input("Ask a question about the data:")
 # Bot Interaction
 if user_query:
     utils.display_msg(user_query, 'user')
-    
+
     with st.chat_message("assistant"):
         st_cb = StreamHandler(st.empty())
         

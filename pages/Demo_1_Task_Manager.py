@@ -15,9 +15,15 @@ from bot_instructions import chatbot_instructions, sqlbot_instructions
 from langchain.chains import LLMChain, SequentialChain
 
 # Streamlit page setup
-st.set_page_config(page_title="GenAg Chatbot", page_icon="🌱") #, layout="wide")
-st.header("Generative Agriculture Chatbot")
-st.write("Natural language farm management tool that queries our actual farm task list. Ask questions like 'What are our gardener's Vinu's active tasks', 'what are some tasks I could complete in 30 minutes or less?', or 'what categories of tasks do we have?'")
+st.set_page_config(page_title="Taks Manager", page_icon="🌱") #, layout="wide")
+st.header("Task Manager Chatbot")
+st.write("""
+- **Query our actual farm task list** through natural language.
+- **Examples of Questions You Can Ask:**
+    - "What are our gardener Vinu's active tasks?"
+    - "What are some tasks I could complete in 30 minutes or less?"
+    - "What categories of tasks do we have?"
+""")
 
 # Define the main class for the Generative Agriculture Chatbot
 class GenerativeAgriculture:
