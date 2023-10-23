@@ -39,11 +39,13 @@ def main():
     For Gaia Go:
     - [Plant Detective](https://generativeagriculture.streamlit.app/1.1_Plant_Detective_demo) :: A plant identifier that lets people identify and collect the plants around them like Pokemon Go.
     - [Librarian](https://generativeagriculture.streamlit.app/1.2_Librarian_demo) :: Trained on farm data, currently able to query recent observations from Plant Detective.
-    For Gaia Garden:
+
+    For Garden of Gaia:
     - [Task Manager](https://generativeagriculture.streamlit.app/2.1_Task_Manager_demo) :: Shows how farm task management can be assisted by AI.
     - [Harvest Tracker](https://generativeagriculture.streamlit.app/2.2_Harvest_Tracker_demo) :: Report items harvested from the garden and add to a database
     - [Database](https://generativeagriculture.streamlit.app/2.3_Database_demo) :: Demonstrates how databases can be queried with natural language, removing the need for training in SQL or data analysis.
-    For 
+    
+    For Farm-to-Table blockchain farmer's market:
     - [Image Assets](https://generativeagriculture.streamlit.app/2.4_Image_Assets_demo) :: Pictures of physical farm assets can be automatically translated into digital assets for a Farmville-style interface, but for your actual farm or garden.
     Blockchain Farmer's Market
     - [Farmers Market](https://generativeagriculture.streamlit.app/3.1_Farmers_Market_demo) :: Shows how multi-attribute double-auctions can be adapted for an online farmer's market.
