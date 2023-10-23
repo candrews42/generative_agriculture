@@ -15,9 +15,11 @@ st.set_page_config(page_title="Farmers Market Chatbot", page_icon="🌽")
 st.subheader("Welcome to the Farmers Market 🥕🌽")
 st.write("""
 **Simulate buying or selling garden-related items in a multi-attribute, double-sided auction.**
+
 **How to Use:**
 - Choose 'Buy' or 'Sell' from the side panel.
 - Describe what you're looking for in the text box that appears.
+
 **Example Query:** 'Carrots within 20 km grown with no pesticides and from a certified organic farm.'
 """)
 

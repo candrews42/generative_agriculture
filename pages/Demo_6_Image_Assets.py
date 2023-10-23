@@ -22,9 +22,11 @@ st.set_page_config(page_title="GenAg Image Asset Generator", page_icon="🌱") #
 st.subheader("Image Asset Generator 🌱📸")
 st.write("""
 **Turn your physical farm assets into digital assets for farm mapping.**
+
 **How to Use:**
 - Take pictures of your physical farm assets.
 - Upload them through the interface below.
+
 **Note:** This tool is a proof of concept and may not be perfect. We're continually improving it.
 """)
 

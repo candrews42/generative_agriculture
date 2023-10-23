@@ -19,6 +19,7 @@ st.set_page_config(page_title="Taks Manager", page_icon="🌱") #, layout="wide"
 st.header("Task Manager Chatbot")
 st.write("""
 **Query our actual farm task list** through natural language.
+
 **Examples of Questions You Can Ask:**
 - "What are our gardener Vinu's active tasks?"
 - "What are some tasks I could complete in 30 minutes or less?"

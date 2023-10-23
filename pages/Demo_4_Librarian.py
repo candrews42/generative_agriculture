@@ -24,7 +24,9 @@ st.set_page_config(page_title="Librarian", page_icon="📚")
 st.subheader("Ask the Librarian 📚")
 st.write("""
 **Explore our raw observations database with natural language queries.**
+
 **How to Use:** Simply ask a question in the text box below.
+
 **Example Question:** 'Have we seen any bugs on our plants?'
 """)
 
