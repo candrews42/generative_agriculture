@@ -24,12 +24,11 @@ st.set_page_config(page_title="Database Viewer", page_icon="📊")
 st.header("Database Demo")
 st.subheader("Database Access Demo")
 st.write("""
-- **Experience natural language queries** with our SQL database.
-- **How to Use:**
-  - Select a database from the sidebar (e.g., Harvest Tracker).
-  - Ask a question related to the selected database.
-- **Example Query:**
-  - "How many chicken eggs did we harvest each month?"
+**Experience natural language queries** with our SQL database.
+**How to Use:**
+- Select a database from the sidebar (e.g., Harvest Tracker).
+- Ask a question related to the selected database.
+**Example Query:** "How many chicken eggs did we harvest each month?"
 """)
 
 
