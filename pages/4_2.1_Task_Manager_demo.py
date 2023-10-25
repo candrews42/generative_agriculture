@@ -60,11 +60,14 @@ class GenerativeAgriculture:
 
     # Function to convert Notion data to Markdown
     def notion_to_markdown(self, notion_data):
+        print("Entering notion_to_markdown")
         markdown_output = ""
         print("\n\nnotion data")
         print(notion_data)
         # Extract and format the title
-        title = notion_data.get("properties", {}).get("Title", {}).get("title", [])[0].get("plain_text", "")
+        title_list = notion_data.get("properties", {}).get("Title", {}).get("title", [])
+        print(f"Title List: {title_list}")  # Debugging line
+        title = title_list[0].get("plain_text", "") if title_list else ""
         markdown_output += f"# {title}\n\n"
         
         # Fetch child blocks
@@ -90,7 +93,7 @@ class GenerativeAgriculture:
                 checkbox = "[x]" if checked else "[ ]"
                 markdown_output += f"- {checkbox} {text_content}\n"
             # Handle more types as needed
-        
+        print("exiting notion to markdown")
         return markdown_output
 
     # Function to fetch and format the task list from Notion
@@ -126,7 +129,7 @@ class GenerativeAgriculture:
             input_variables = ['task_list', 'user_input'],
             template=chatbot_instructions
         )
-        llm=OpenAI(model_name=_self.openai_model, temperature=0.0, streaming=False)
+        llm=OpenAI(model_name=_self.openai_model, temperature=0.0, streaming=True)
         chatbot_agent = LLMChain(
             llm=llm, 
             memory=chatbot_memory, 
