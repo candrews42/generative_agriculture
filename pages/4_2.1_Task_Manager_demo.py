@@ -15,7 +15,7 @@ from bot_instructions import chatbot_instructions, sqlbot_instructions
 from langchain.chains import LLMChain, SequentialChain
 
 # Streamlit page setup
-st.set_page_config(page_title="Taks Manager", page_icon="🌱") #, layout="wide")
+st.set_page_config(page_title="Task Manager", page_icon="🌱") #, layout="wide")
 st.header("Task Manager Chatbot")
 st.write("""
 **Query our actual farm task list** through natural language.
@@ -46,6 +46,7 @@ class GenerativeAgriculture:
         }
         res = requests.request("GET", readUrl, headers=self.headers)
         print("\ncollected data:")
+        print(f"API Response: {res.json()}")
         print(res.json())
         return res.json()
     
