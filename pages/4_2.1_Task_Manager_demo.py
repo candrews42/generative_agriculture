@@ -45,6 +45,8 @@ class GenerativeAgriculture:
             "Notion-Version": "2022-02-22"
         }
         res = requests.request("GET", readUrl, headers=self.headers)
+        print("\ncollected data:")
+        print(res.json())
         return res.json()
     
     # Function to fetch child blocks
