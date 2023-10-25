@@ -44,10 +44,12 @@ class GenerativeAgriculture:
             "Content-Type": "application/json",
             "Notion-Version": "2022-02-22"
         }
+        print("here")
         res = requests.request("GET", readUrl, headers=self.headers)
         print("\ncollected data:")
+        print(res)
         print(f"API Response: {res.json()}")
-        print(res.json())
+        
         return res.json()
     
     # Function to fetch child blocks
