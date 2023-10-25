@@ -61,7 +61,8 @@ class GenerativeAgriculture:
     # Function to convert Notion data to Markdown
     def notion_to_markdown(self, notion_data):
         markdown_output = ""
-        
+        print("\n\nnotion data")
+        print(notion_data)
         # Extract and format the title
         title = notion_data.get("properties", {}).get("Title", {}).get("title", [])[0].get("plain_text", "")
         markdown_output += f"# {title}\n\n"
