@@ -129,7 +129,7 @@ class GenerativeAgriculture:
             input_variables = ['task_list', 'user_input'],
             template=chatbot_instructions
         )
-        llm=OpenAI(model_name=_self.openai_model, temperature=0.0, streaming=True)
+        llm=OpenAI(model_name=_self.openai_model, temperature=0.1, streaming=True)
         chatbot_agent = LLMChain(
             llm=llm, 
             memory=chatbot_memory, 
